@@ -1,0 +1,51 @@
+.container {
+  background-color: #f1f1f1;
+  height: 66%;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  grid-template-rows: auto;
+  grid-template-areas: "rate percent";
+}
+
+.message {
+  grid-area: rate;
+  font-family: "Modern No. 20";
+  font-size: 33px;
+  text-align: left;
+  padding: 10% 0 0 10%;
+}
+
+.messageBottom {
+  grid-area: rate;
+  font-family: "Source Sans Pro";
+  font-weight: 100;
+  font-size: 23px;
+  color: #424242;
+  padding-top: 4%;
+}
+
+.openBook {
+  width: 10%;
+  padding-left: 5%;
+  transform: translateY(20%);
+  vertical-align: baseline;
+}
+
+.group {
+  display: flex;
+}
+
+.rate {
+  grid-area: percent;
+  border-left: 1px solid;
+  border-color: black;
+  font-family: "Brush Script MT";
+  font-size: 45px;
+  color: #bb5000;
+  height: 60%;
+  align-self: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

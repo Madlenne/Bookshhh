@@ -4,15 +4,11 @@
   justify-content: space-between;
 }
 .message {
-  font-size: 18px;
-  // background: url("../../icons/magnifying-glass.png");
-  background-repeat: no-repeat;
-  //border: 0 0 inherit 0;
+  font-size: 19px;
   border: 0;
-  padding-bottom: 2%;
-  // border: 1px solid red;
   width: 100%;
-  // background-size: 20px auto;
+  right: 0;
+  outline: none;
 
   &:focus {
     outline: none;
@@ -22,7 +18,9 @@
 .magnifyingGlass {
   width: 8%;
   height: 8%;
-  padding-bottom: 2%;
+  padding: 2%;
 
-  // transform: translateY(-25%);
+  &:hover {
+    cursor: pointer;
+  }
 }

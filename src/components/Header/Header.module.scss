@@ -1,4 +1,5 @@
 .container {
+  grid-area: header;
   display: grid;
   grid-template-columns: 0.4fr 1fr 0.5fr 0.5fr;
   grid-template-rows: auto;
@@ -27,10 +28,18 @@
   font-size: 25px;
   font-family: "Modern No. 20";
   color: #dddddd;
+
+  &:hover {
+    color: #9f4600;
+  }
 }
 
 .special {
   color: #0e0e0e;
+
+  &:hover {
+    color: #9f4600;
+  }
 }
 
 .search {
@@ -46,9 +55,9 @@
 
 .ring {
   padding-right: 20%;
-  width: 12%;
+  width: 10%;
 }
 
 .user {
-  width: 12%;
+  width: 10%;
 }
