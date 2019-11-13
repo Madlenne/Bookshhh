@@ -4,8 +4,11 @@ import { NavLink } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
 import Ring from '../../icons/ring.png';
 import User from '../../icons/user.png';
+import Dropdown from '../ui/Dropdown/Dropdown.jsx'
 
 import css from './Header.module.scss';
+
+const userButtonRenderer = (onClick) => <img src={User} className={css.user} onClick={onClick} alt='userIcon'/>
 
 
 const Header = () => {
@@ -34,9 +37,14 @@ const Header = () => {
                 </span>
                 <span className={css.userIcon}>
                     <img src={Ring} className={css.ring} alt='ringIcon'/>
-                    <img src={User} className={css.user} alt='userIcon'/>
+                    
+                    <Dropdown buttonRenderer={userButtonRenderer}>
+                        <Dropdown.Item>My library</Dropdown.Item>
+                        <Dropdown.Item>Calendar</Dropdown.Item>
+                        <Dropdown.Item>Profile</Dropdown.Item>
+                        <Dropdown.Item>Log out</Dropdown.Item>
+                    </Dropdown>
                 </span>
-
             </div>
         );
 }
