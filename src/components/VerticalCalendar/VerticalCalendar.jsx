@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as PropTypes from 'prop-types';
 
 import classnames from 'classnames/bind';
@@ -16,17 +16,25 @@ const VerticalCalendar = ({ className }) => {
     const currentDay = currentDate.getDate();
     let days = [];
 
+    const [clickedDay, setClickedDay] = useState(currentDay);
+
     for(let i=0; i<5; ++i){
         days.push(currentDay+i);
     }
     
+    const onDayClick = (day) => {
+        setClickedDay(day);
+    }
+
     const monthName = monthNames[currentDate.getMonth()];
 
     return(
          <div className={css.container}>
              <span className={css.days}>
-                {days.map((day,index) => 
-                    index === 0 ? <div className={cln('day', 'currentDay')}>   {monthName} {day}</div> : <div className={css.day}>{day}</div>
+                {days.map((day) => 
+                    <div className={cln('day', {'currentDay': clickedDay === day})} onClick={() => onDayClick(day)}>
+                        {clickedDay === day ? monthName : ''} {day}
+                    </div>
                 )}
              </span>
          </div>
