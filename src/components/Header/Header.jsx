@@ -8,7 +8,7 @@ import Dropdown from '../ui/Dropdown/Dropdown.jsx'
 
 import css from './Header.module.scss';
 
-const userButtonRenderer = (onClick) => <img src={User} className={css.user} onClick={onClick} alt='userIcon'/>
+const userButtonRenderer = (onClick, ref) => <img src={User} className={css.user} onClick={onClick} ref={ref} alt='userIcon'/>
 
 
 const Header = () => {
