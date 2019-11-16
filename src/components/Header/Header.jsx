@@ -10,6 +10,7 @@ import css from './Header.module.scss';
 
 const userButtonRenderer = (onClick, ref) => <img src={User} className={css.user} onClick={onClick} ref={ref} alt='userIcon'/>
 
+const ringButtonRenderer = (onClick, ref) => <img src={Ring} className={css.ring} onClick={onClick} ref={ref} alt='ringIcon'/>
 
 const Header = () => {
 
@@ -34,15 +35,19 @@ const Header = () => {
                     </span>
                 <span className={css.search}>
                     <Search />
+
                 </span>
                 <span className={css.userIcon}>
-                    <img src={Ring} className={css.ring} alt='ringIcon'/>
-                    
-                    <Dropdown buttonRenderer={userButtonRenderer}>
-                        <Dropdown.Item>My library</Dropdown.Item>
-                        <Dropdown.Item>Calendar</Dropdown.Item>
-                        <Dropdown.Item>Profile</Dropdown.Item>
-                        <Dropdown.Item>Log out</Dropdown.Item>
+                        <Dropdown buttonRenderer={ringButtonRenderer} arrowPosition={27}>
+                            <Dropdown.Item itemKey='Test'>You have one test to take until tomorrow</Dropdown.Item>
+                            <Dropdown.Item itemKey='ContinueRead'>You haven't read Misery for 5 days. Maybe it's time to continue?</Dropdown.Item>
+                        </Dropdown>
+
+                    <Dropdown buttonRenderer={userButtonRenderer} arrowPosition={75}>
+                        <Dropdown.Item itemKey='MyLibrary'>My library</Dropdown.Item>
+                        <Dropdown.Item itemKey='Calendar'>Calendar</Dropdown.Item>
+                        <Dropdown.Item itemKey='Profile'>Profile</Dropdown.Item>
+                        <Dropdown.Item itemKey='LogOut'>Log out</Dropdown.Item>
                     </Dropdown>
                 </span>
             </div>

@@ -5,51 +5,56 @@
   position: absolute;
   //margin: 0;
   top: calc(100% + 22px);
-  width: 130px;
+  width: max-content + 50px;
+  padding: 0 10%;
   z-index: 99999;
   right: 19%;
 
   &--expanded {
     display: block;
   }
+}
+.arrow {
+  // &:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #000000 transparent;
+  z-index: 9999;
+  // }
 
-  &:before {
+  &:after {
     content: "";
     position: absolute;
-    right: 8px;
-    top: -10px;
+    right: -10px;
+    top: 0;
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 0 10px 10px 10px;
     border-color: transparent transparent #ffffff transparent;
-    z-index: 9999;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    right: 8px;
-    top: -11px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 10px 10px 10px;
-    border-color: transparent transparent #797979 transparent;
-    z-index: 9998;
+    z-index: 9995;
   }
 }
 
 .menuItem {
   padding: 5px 0;
   font-family: "Open Sans";
+  text-align: center;
 
   &:hover {
     cursor: pointer;
     color: #9f4600;
   }
 
-  &:first-child {
+  &:nth-child(2) {
     padding-top: 15px;
   }
 

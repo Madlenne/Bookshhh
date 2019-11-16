@@ -8,20 +8,20 @@ import css from './Dropdown.module.scss';
 
 const cln = classnames.bind(css);
 
-const Dropdown = ({ buttonRenderer, children }) => {
+const Dropdown = ({ buttonRenderer, arrowPosition, children }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const container = useRef();
-    const initials = useRef();
+    const buttonRendererIcon = useRef();
 
     const onClick = () => {
-
+        console.log('expanded');
         setIsExpanded(isExpanded => !isExpanded);
     }
 
     const handleOutsideAndOptionClick = (event) => {
 
-        if(initials.current.contains(event.target)){
+        if(buttonRendererIcon.current.contains(event.target)){
             return;
         }
 
@@ -32,9 +32,11 @@ const Dropdown = ({ buttonRenderer, children }) => {
     
     return( 
         <>
-        {buttonRenderer(onClick, initials)}
+        {buttonRenderer(onClick, buttonRendererIcon)}
             <div className={cln('container', { 'container--expanded': isExpanded })} ref={container}>
-                {children}
+               <span className={css.arrow} style={{left: `${arrowPosition}%`}}>
+               </span>
+                    {children}
             </div>
         </>
     );
@@ -43,6 +45,11 @@ const Dropdown = ({ buttonRenderer, children }) => {
 Dropdown.propTypes = {
     buttonRenderer: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
+    arrowPosition: PropTypes.number,
+}
+
+Dropdown.defaultProps = {
+    arrowPosition: 0,
 }
 
 const Item = ({ children, onClick, itemKey, className }) => (
