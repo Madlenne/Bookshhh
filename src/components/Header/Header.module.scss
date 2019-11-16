@@ -65,6 +65,24 @@
   width: 10%;
 }
 
+.info {
+  display: grid;
+  grid-template-columns: 0.3fr 1.5fr;
+  grid-gap: 10px;
+  justify-content: space-between;
+}
+
+.testIcon {
+  width: 80%;
+  height: auto;
+  align-self: center;
+}
+
+.bookTitle {
+  font-family: "Modern No. 20";
+  font-size: 20px;
+}
+
 .user {
   width: 10%;
 }

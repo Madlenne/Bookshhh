@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
 import Ring from '../../icons/ring.png';
 import User from '../../icons/user.png';
+import Exam from '../../icons/exam.png';
+import BookStack from '../../icons/books-stack-of-three.png';
 import Dropdown from '../ui/Dropdown/Dropdown.jsx'
 
 import css from './Header.module.scss';
@@ -39,12 +41,26 @@ const Header = () => {
                 </span>
                 <span className={css.userIcon}>
                         <Dropdown buttonRenderer={ringButtonRenderer} arrowPosition={27}>
-                            <Dropdown.Item itemKey='Test'>You have one test to take until tomorrow</Dropdown.Item>
-                            <Dropdown.Item itemKey='ContinueRead'>You haven't read Misery for 5 days. Maybe it's time to continue?</Dropdown.Item>
+                            <Dropdown.Item itemKey='Test' className={css.info}>
+                                <img src={Exam} className={css.testIcon} alt='testIcon'/>
+                                <span>
+                                    You have one test to take until tomorrow
+                                </span>
+                                </Dropdown.Item>
+                            <Dropdown.Item itemKey='ContinueRead' className={css.info}>
+                                <img src={BookStack} className={css.testIcon} alt='testIcon'/>
+                                <span>
+                                    You haven't read 
+                                    <span className={css.bookTitle}> Misery </span> 
+                                    for 5 days. Maybe it's time to continue?
+                                </span>
+                                </Dropdown.Item>
                         </Dropdown>
 
                     <Dropdown buttonRenderer={userButtonRenderer} arrowPosition={75}>
-                        <Dropdown.Item itemKey='MyLibrary'>My library</Dropdown.Item>
+                        <Dropdown.Item itemKey='MyLibrary'>
+                  
+                        </Dropdown.Item>
                         <Dropdown.Item itemKey='Calendar'>Calendar</Dropdown.Item>
                         <Dropdown.Item itemKey='Profile'>Profile</Dropdown.Item>
                         <Dropdown.Item itemKey='LogOut'>Log out</Dropdown.Item>
