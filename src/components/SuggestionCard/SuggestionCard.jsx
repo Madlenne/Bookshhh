@@ -9,7 +9,7 @@ const SuggestionCard = () => {
         <div className={css.container}>
             <img src={Cover} className={css.cover} alt='bookCover'/>
             <span className={css.bookTitle}>The Shining </span>
-            <span className={css.bookDescription}>Lorem ipsum dolor sit amet blablabla  </span>
+            <span className={css.bookDescription}>Lorem ipsum dolor sit amet lorem ipsum dolor sit amet </span>
         </div>
 
     );

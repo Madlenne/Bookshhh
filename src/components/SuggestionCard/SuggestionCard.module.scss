@@ -3,9 +3,9 @@
   grid-template-columns: 0.3fr 0.7fr;
   grid-template-rows: 0.2fr 0.8fr;
   grid-template-areas: "cover title" "cover description";
-  padding: 15% 10%;
+  padding: 10% 10%;
   grid-gap: 5%;
-  justify-items: center;
+  justify-items: start;
   position: relative;
 
   &:before {
@@ -19,7 +19,7 @@
   }
 
   &:first-child {
-    padding-top: 25%;
+    padding-top: 20%;
   }
 }
 
@@ -28,11 +28,14 @@
   font-size: 18px;
   grid-area: title;
   padding-bottom: 8%;
+  text-align: left;
 }
 
 .bookDescription {
   grid-area: description;
   font-size: 14px;
+  text-align: left;
+  color: #747474;
 }
 
 .cover {

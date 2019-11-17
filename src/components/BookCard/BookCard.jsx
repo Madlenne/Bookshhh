@@ -20,6 +20,7 @@ const BookCard = () => {
                 </div>
 
                 <div className={css.rate}>
+                    Grade!
                     <Stars/>
                 </div>                
                 <div className={css.progress}>
@@ -27,7 +28,7 @@ const BookCard = () => {
                 </div>
             </span>
             <span className={css.bookDescription}>
-                Lorem ipsum dolor sit amet blablabla  
+            Framed in the doorway of Poirot’s bedroom stood an uninvited guest, coated from head to foot in dust. The man’s gaunt face stared for a moment, then he swayed and fell.  
             </span>
             
         </div>
