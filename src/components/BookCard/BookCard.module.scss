@@ -1,0 +1,67 @@
+.container {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 4fr;
+  grid-template-areas: "cover info description";
+  grid-gap: 5%;
+  padding: 3%;
+  background-color: #fafafa;
+  margin: 3% 0;
+}
+
+.cover {
+  grid-area: cover;
+  width: 100%;
+  align-self: center;
+}
+
+.info {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-rows: 0.6fr 0.4fr;
+  grid-template-areas:
+    "basicInfo rate"
+    "progress rate";
+
+  grid-gap: 3%;
+  color: black;
+}
+
+.basicInfo {
+  grid-area: basicInfo;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-size: 23px;
+}
+
+.author {
+  font-size: 15px;
+  font-family: "Open Sans";
+  color: #363636;
+  padding-top: 4%;
+}
+
+.rate {
+  grid-area: rate;
+  align-self: center;
+}
+
+.progress {
+  grid-area: progress;
+
+  font-size: 13px;
+  font-family: "Open Sans";
+  color: #363636;
+  align-self: end;
+}
+
+.bookDescription {
+  grid-area: description;
+  color: #707070;
+  font-size: 15px;
+  font-family: "Open Sans";
+  border-left: 1px solid #707070;
+  padding: 3% 6%;
+}
