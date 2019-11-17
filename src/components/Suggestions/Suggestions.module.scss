@@ -1,0 +1,18 @@
+.container {
+  color: white;
+  grid-area: suggestions;
+}
+
+.title {
+  font-family: "Open Sans";
+  font-size: 20px;
+  color: white;
+  border-bottom: 1px solid #9f4600;
+  width: 140%;
+  padding: 3% 25% 3% 0;
+}
+
+.recommendation {
+  display: flex;
+  flex-direction: column;
+}

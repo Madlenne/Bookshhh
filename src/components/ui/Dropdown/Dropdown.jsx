@@ -15,17 +15,16 @@ const Dropdown = ({ buttonRenderer, arrowPosition, children }) => {
     const buttonRendererIcon = useRef();
 
     const onClick = () => {
-        console.log('expanded');
         setIsExpanded(isExpanded => !isExpanded);
     }
 
     const handleOutsideAndOptionClick = (event) => {
 
-        if(buttonRendererIcon.current.contains(event.target)){
+        if(container.current.contains(event.target) || buttonRendererIcon.current.contains(event.target)){
             return;
         }
 
-        setIsExpanded(false);
+         setIsExpanded(false);
     }
 
     useEventListener('mousedown', handleOutsideAndOptionClick);

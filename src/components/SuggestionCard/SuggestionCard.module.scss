@@ -1,0 +1,42 @@
+.container {
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-rows: 0.2fr 0.8fr;
+  grid-template-areas: "cover title" "cover description";
+  padding: 15% 10%;
+  grid-gap: 5%;
+  justify-items: center;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+    height: 1px;
+    width: 80%;
+    border-bottom: 1px solid #676767;
+  }
+
+  &:first-child {
+    padding-top: 25%;
+  }
+}
+
+.bookTitle {
+  font-family: "Modern No. 20";
+  font-size: 18px;
+  grid-area: title;
+  padding-bottom: 8%;
+}
+
+.bookDescription {
+  grid-area: description;
+  font-size: 14px;
+}
+
+.cover {
+  grid-area: cover;
+  align-self: center;
+  width: 100%;
+}
