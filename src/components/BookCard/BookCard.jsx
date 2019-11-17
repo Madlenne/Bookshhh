@@ -20,7 +20,7 @@ const BookCard = () => {
                 </div>
 
                 <div className={css.rate}>
-                    {/* <Stars/> */}
+                    <Stars/>
                 </div>                
                 <div className={css.progress}>
                     Read in: <b> 100% </b>
