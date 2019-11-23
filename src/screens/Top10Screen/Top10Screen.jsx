@@ -19,7 +19,7 @@ const Top10Screen = () => {
             <span className={css.myLibrary}>
                 <span className={css.title2}>
                     Top 10
-                    <BookCard />
+                    <BookCard isStartedReading/>
                     <BookCard />
                     <BookCard />
                 </span>

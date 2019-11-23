@@ -50,10 +50,6 @@
   text-align: center;
   color: #9f4600;
 }
-.gradeText {
-  grid-area: rate;
-  align-self: start;
-}
 
 .progress {
   grid-area: progress;
@@ -62,6 +58,14 @@
   font-family: "Open Sans";
   color: #363636;
   align-self: center;
+}
+
+.bookGenre {
+  grid-area: progress;
+  font-size: 15px;
+  align-self: center;
+
+  color: #9f4600;
 }
 
 .bookDescription {
