@@ -4,6 +4,7 @@ import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen.jsx';
 import LibraryScreen from './screens/LibraryScreen/LibraryScreen.jsx';
 import WorkspaceScreen from './screens/WorkspaceScreen/WorkspaceScreen.jsx';
 import GenreScreen from './screens/GenreScreen/GenreScreen.jsx';
+import Top10Screen from './screens/Top10Screen/Top10Screen.jsx';
 
 import './App.css';
 
@@ -12,7 +13,7 @@ function App() {
     <div className="App">
       <Router>
         <Route exact path="/" component={WelcomeScreen} />
-        <Route exact path="/top" component={WelcomeScreen} />
+        <Route exact path="/top" component={Top10Screen} />
         <Route exact path="/genres" component={GenreScreen} />
         <Route exact path="/workspaces" component={WorkspaceScreen} />
         <Route exact path="/news" component={WelcomeScreen} />
