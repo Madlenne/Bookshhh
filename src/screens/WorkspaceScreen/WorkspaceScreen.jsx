@@ -9,7 +9,7 @@ import css from './WorkspaceScreen.module.scss';
 
 const WorkspaceScreen = () => {
 
-    const workspaces = [1,2,3,4,5,6,7,8,9,10];
+    const workspaces = [1];
 
     return(
         <div className={css.container}>

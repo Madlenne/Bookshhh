@@ -15,11 +15,11 @@
   grid-area: rest;
   display: grid;
   grid-template-columns: 0.87fr 4fr;
-  grid-template-areas: "suggestions workspaces";
+  grid-template-areas: "suggestions genres";
 }
 
-.workspaces {
-  grid-area: workspaces;
+.genres {
+  grid-area: genres;
   text-align: left;
   padding-left: 5%;
 }
@@ -30,15 +30,16 @@
   color: #9f4600;
 }
 
-.workspaceCards {
+.genreCards {
   padding-top: 2%;
   grid-area: workspaces;
   display: grid;
   grid-gap: 2%;
-  grid-template-columns: repeat(auto-fit, minmax(580px, 5fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 5fr));
   overflow: scroll;
+  min-height: 100%;
 }
 
-.workspaceCardClassName {
+.genreCardClassName {
   background-color: rgba(250, 175, 111, 0.1);
 }

@@ -5,6 +5,7 @@
   grid-template-areas: "image info members";
   grid-gap: 10%;
   padding: 40px;
+  width: 580px;
 
   @media screen and (max-width: 1516px) {
     width: 580px;

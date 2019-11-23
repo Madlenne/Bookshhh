@@ -1,0 +1,43 @@
+.container {
+  background-color: #fafafa;
+  display: grid;
+  grid-template-columns: 0.4fr 0.2fr 0.4fr;
+  grid-template-areas: "image info amount";
+  justify-content: space-between;
+  grid-gap: 10%;
+  padding: 40px;
+
+  @media screen and (max-width: 1516px) {
+    width: 300px;
+  }
+}
+
+.thumbnail {
+  grid-area: image;
+  width: 90px;
+  align-self: center;
+}
+
+.info {
+  grid-area: info;
+  font-family: "Modern No. 20";
+  font-size: 28px;
+  padding-right: 10%;
+  align-self: center;
+}
+
+.booksAmount {
+  grid-area: amount;
+  align-self: center;
+  text-align: center;
+  border: 1px solid #9f4600;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+}
+
+.number {
+  align-self: center;
+}
