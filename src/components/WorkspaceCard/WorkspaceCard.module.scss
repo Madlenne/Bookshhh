@@ -1,0 +1,44 @@
+.container {
+  background-color: #fafafa;
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 0.5fr;
+  grid-template-areas: "image info members";
+  grid-gap: 10%;
+  padding: 40px;
+
+  @media screen and (max-width: 1516px) {
+    width: 580px;
+  }
+}
+
+.thumbnail {
+  grid-area: image;
+  width: 100%;
+  align-self: center;
+}
+
+.info {
+  grid-area: info;
+  font-family: "Modern No. 20";
+  font-size: 28px;
+  border-right: 1px solid #9f4600;
+  padding-right: 10%;
+}
+
+.description {
+  font-family: "Open Sans";
+  font-size: 15px;
+  padding-top: 5%;
+}
+
+.members {
+  grid-area: members;
+  align-self: center;
+  text-align: center;
+}
+
+.text {
+  color: rgb(77, 77, 77);
+  font-size: 14px;
+  padding-top: 7%;
+}
