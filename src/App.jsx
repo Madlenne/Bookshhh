@@ -6,6 +6,7 @@ import WorkspaceScreen from './screens/WorkspaceScreen/WorkspaceScreen.jsx';
 import GenreScreen from './screens/GenreScreen/GenreScreen.jsx';
 import Top10Screen from './screens/Top10Screen/Top10Screen.jsx';
 import NewsScreen from './screens/NewsScreen/NewsScreen.jsx';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen.jsx';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/workspaces" component={WorkspaceScreen} />
         <Route exact path="/news" component={NewsScreen} />
         <Route path="/library" component={LibraryScreen} />
+        <Route path="/profile" component={ProfileScreen} />
       </Router>
     </div>
   );

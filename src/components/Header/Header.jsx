@@ -92,7 +92,11 @@ const Header = ({ mode }) => {
                         </NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item itemKey='Calendar'>Calendar</Dropdown.Item>
-                    <Dropdown.Item itemKey='Profile'>Profile</Dropdown.Item>
+                    <Dropdown.Item itemKey='Profile'>
+                        <NavLink to='/profile' className={css.library}>
+                            Profile
+                        </NavLink>
+                    </Dropdown.Item>
                     <Dropdown.Item itemKey='LogOut'>Log out</Dropdown.Item>
                 </Dropdown>
             </span>

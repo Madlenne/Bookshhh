@@ -1,0 +1,111 @@
+.container {
+  display: grid;
+  grid-template-rows: 100px auto;
+  grid-template-columns: auto;
+  grid-template-areas: "header" "middle";
+  grid-gap: 5%;
+  min-height: 100%;
+  background: linear-gradient(90deg, #242424 50%, #ffffff 50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.content {
+  grid-area: middle;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "profile calendar";
+  padding-top: 2%;
+}
+
+.leftPart {
+  grid-area: profile;
+  display: grid;
+  grid-template-rows: 250px 0.5fr;
+  grid-template-areas: "userInfo" "userActivity";
+  grid-gap: 10%;
+  padding: 0 5%;
+}
+
+.userInfo {
+  grid-area: userInfo;
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-areas: "userAvatar userName";
+  justify-items: center;
+}
+
+.userAvatar {
+  grid-area: userAvatar;
+  width: 100%;
+  background-color: white;
+}
+
+.userName {
+  grid-area: userName;
+  font-family: "Modern No. 20";
+  color: white;
+  font-size: 50px;
+}
+
+.userStatus {
+  font-family: "Open Sans";
+  color: #9f4600;
+  font-size: 17px;
+  padding-top: 5%;
+}
+
+.button {
+  grid-area: userName;
+  align-self: end;
+  width: 35%;
+  padding: 3% 3%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: none;
+  color: rgba(211, 211, 211, 0.9);
+  font-size: 15px;
+  outline: none;
+
+  &:hover {
+    outline: none;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.userActivity {
+  grid-area: userActivity;
+  justify-content: start;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  align-self: start;
+}
+
+.tab {
+  color: rgba(211, 211, 211, 0.9);
+  text-decoration: none;
+  font-size: 18px;
+  padding: 0 2% 2% 0;
+  border-bottom: 1px solid #707070;
+  width: 19%;
+  text-align: left;
+}
+
+.activeClassName {
+  border-bottom: 1px solid #ac5615;
+}
+
+.rightPart {
+  grid-area: calendar;
+}
+
+.rateBox {
+  grid-area: rate;
+  width: 70%;
+  justify-self: end;
+}

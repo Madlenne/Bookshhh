@@ -1,0 +1,25 @@
+.table {
+  align-self: center;
+  padding-top: 2%;
+}
+
+.tableRow {
+  border-bottom: 1px solid #707070;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(211, 211, 211, 0.9);
+  padding: 5% 3% 2% 0;
+  position: relative;
+}
+
+.number {
+  border: 1px solid #9f4600;
+  border-radius: 50%;
+  padding: 12px;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  text-align: center;
+}

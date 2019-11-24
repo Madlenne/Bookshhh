@@ -1,0 +1,30 @@
+.table {
+  align-self: center;
+  padding-top: 2%;
+}
+
+.tableRow {
+  border-bottom: 1px solid #707070;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(211, 211, 211, 0.9);
+  padding: 5% 3% 2% 0;
+  position: relative;
+}
+
+.opinion {
+  padding-top: 2%;
+  align-self: end;
+}
+
+.bookData {
+  font-family: "Modern No. 20";
+  color: #d3d3d3;
+  font-size: 18px;
+}
+
+.author {
+  font-family: "Open Sans";
+  color: #d3d3d3;
+  font-size: 13px;
+}
