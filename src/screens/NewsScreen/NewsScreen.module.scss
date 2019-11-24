@@ -1,7 +1,6 @@
 .container {
   display: grid;
-  min-height: 100%;
-  grid-template-rows: 100px 2fr 0.6fr;
+  grid-template-rows: 100px auto;
   grid-template-columns: auto;
   grid-template-areas: "header" "rest";
   grid-gap: 50px;
@@ -14,11 +13,11 @@
   grid-area: rest;
   display: grid;
   grid-template-columns: 0.87fr 4fr;
-  grid-template-areas: "suggestions genres";
+  grid-template-areas: "suggestions news";
 }
 
-.genres {
-  grid-area: genres;
+.news {
+  grid-area: news;
   text-align: left;
   padding-left: 5%;
   padding-right: 5%;
@@ -30,15 +29,30 @@
   color: #9f4600;
 }
 
-.genreCards {
+.newsCards {
   padding-top: 2%;
-  grid-area: workspaces;
+  grid-area: news;
   display: grid;
   grid-gap: 2%;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 5fr));
+  grid-template-rows: 0.3fr auto;
+  grid-template-areas: "mainNews" "otherNews";
   min-height: 100%;
+  justify-items: space-evenly;
 }
 
-.genreCardClassName {
+.mainNews {
+  grid-area: mainNews;
+  margin-bottom: 3%;
+}
+
+.otherNews {
+  display: grid;
+  grid-area: otherNews;
+
+  grid-gap: 5%;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 5fr));
+}
+
+.newsCardClassName {
   background-color: rgba(250, 175, 111, 0.1);
 }

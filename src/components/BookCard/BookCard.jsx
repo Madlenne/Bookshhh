@@ -5,7 +5,7 @@ import Stars from '../ui/Stars/Stars.jsx';
 import css from './BookCard.module.scss';
 
 
-const BookCard = ({ isStartedReading }) => {
+const BookCard = ({ hasStartedReading }) => {
     return(
         <div className={css.container}>
             <img src={Cover} className={css.cover} alt='bookCover'/>
@@ -23,7 +23,7 @@ const BookCard = ({ isStartedReading }) => {
                     Grade!
                     <Stars/>
                 </div>                
-                {isStartedReading 
+                {hasStartedReading 
                 ?   <div className={css.progress}>
                         Read in: <b> 100% </b>
                     </div>
@@ -43,11 +43,11 @@ const BookCard = ({ isStartedReading }) => {
 }
 
 BookCard.propTypes = {
-    isStartedReading: PropTypes.string,
+    hasStartedReading: PropTypes.string,
 }
 
 BookCard.defaultProps = {
-    isStartedReading: false,
+    hasStartedReading: false,
 }
 
 export default BookCard;

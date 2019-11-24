@@ -1,0 +1,42 @@
+.container {
+  background-color: #fafafa;
+  display: grid;
+  grid-template-areas: "title" "info";
+  justify-content: space-between;
+  grid-gap: 5%;
+  padding: 40px;
+
+  &--extended {
+    background-color: #fafafa;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: 0.2fr 0.5fr;
+    grid-template-areas: "image title" "image info";
+    justify-content: space-between;
+    grid-gap: 5%;
+    padding: 40px;
+  }
+
+  @media screen and (max-width: 1516px) {
+  }
+}
+
+.thumbnail {
+  grid-area: image;
+  width: 150px;
+  align-self: center;
+}
+
+.title {
+  grid-area: title;
+  font-size: 28px;
+  font-family: "Modern No. 20";
+}
+
+.info {
+  grid-area: info;
+  font-family: "Open Sans";
+  font-size: 17px;
+  padding-right: 10%;
+  align-self: center;
+}
