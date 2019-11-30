@@ -102,6 +102,12 @@
 
 .rightPart {
   grid-area: calendar;
+  align-self: start;
+}
+
+.calendar {
+  width: 70%;
+  margin: auto;
 }
 
 .rateBox {

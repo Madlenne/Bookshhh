@@ -1,0 +1,89 @@
+.container {
+  display: grid;
+  grid-template-rows: 0.1fr 1fr;
+  grid-template-areas: "monthAndYear" "days";
+  grid-gap: 20px;
+  background-color: #fafafa;
+  padding: 5% 0;
+}
+
+.monthAndYear {
+  grid-area: monthAndYear;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+.month {
+  color: black;
+  font-weight: 700;
+  font-size: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.monthsList {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+}
+
+.year {
+  color: #bb5000;
+  font-size: 23px;
+}
+
+.days {
+  place-self: center;
+
+  display: grid;
+  grid-area: days;
+  grid-template-columns: repeat(7, 50px);
+  grid-gap: 8px;
+
+  font-size: 19px;
+}
+
+.days > * {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.days > *::before {
+  content: "";
+  display: inline-block;
+  height: 0;
+  width: 1px;
+}
+
+.day {
+  padding: 10px 0;
+
+  &:hover,
+  &:focus {
+    color: #bb5000;
+    cursor: pointer;
+  }
+}
+
+.listContainer {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #424242;
+  padding: 0 5%;
+}
+
+.listContent {
+  list-style-type: none;
+  padding: 0;
+}
+
+.monthList {
+  left: 15%;
+  padding: 5%;
+  width: 100px;
+  height: 150px;
+  overflow: scroll;
+}

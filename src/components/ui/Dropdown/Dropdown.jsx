@@ -8,12 +8,11 @@ import css from './Dropdown.module.scss';
 
 const cln = classnames.bind(css);
 
-const Dropdown = ({ buttonRenderer, arrowPosition, children }) => {
+const Dropdown = ({ buttonRenderer, className, arrowPosition, children }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const container = useRef();
     const buttonRendererIcon = useRef();
-
     const onClick = () => {
         setIsExpanded(isExpanded => !isExpanded);
     }
@@ -32,7 +31,7 @@ const Dropdown = ({ buttonRenderer, arrowPosition, children }) => {
     return( 
         <>
         {buttonRenderer(onClick, buttonRendererIcon)}
-            <div className={cln('container', { 'container--expanded': isExpanded })} ref={container}>
+            <div className={cln('container', className, { 'container--expanded': isExpanded })} ref={container}>
                <span className={css.arrow} style={{left: `${arrowPosition}%`}}>
                </span>
                     {children}

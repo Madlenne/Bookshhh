@@ -2,6 +2,7 @@ import React from 'react'
 import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import RateBox from '../../components/RateBox/RateBox.jsx';
+import Calendar from '../../components/Calendar/Calendar.jsx';
 import { NavLink, useLocation } from 'react-router-dom';
 import Avatar from './woman-avatar.png';
 import css from './ProfileScreen.module.scss';
@@ -16,10 +17,10 @@ const ProfileScreen = () => {
     const { pathname } = location;
 
     console.log(pathname);
-    const highlightCurrentTab= (tabName) => {
+
+    const highlightCurrentTab = (tabName) => {
         const { pathname } = location;
-        
-        return pathname === `/profile/${tabName}`;
+        return pathname === `/profile${tabName}`;
     }
 
     return(
@@ -41,7 +42,7 @@ const ProfileScreen = () => {
                             to='/profile/statistics' 
                             className={css.tab}
                             activeClassName={css.activeClassName} 
-                            isActive={() => highlightCurrentTab('statistics')} 
+                            isActive={() => highlightCurrentTab('/statistics') || highlightCurrentTab('')} 
                             >
                                 Statistics
                             </NavLink>
@@ -49,7 +50,7 @@ const ProfileScreen = () => {
                             to='/profile/threads' 
                             className={css.tab}
                             activeClassName={css.activeClassName} 
-                            isActive={() => highlightCurrentTab('threads')} 
+                            isActive={() => highlightCurrentTab('/threads')} 
                             >
                                 Latest threads
                             </NavLink>
@@ -57,25 +58,25 @@ const ProfileScreen = () => {
                             to='/profile/tests' 
                             className={css.tab}
                             activeClassName={css.activeClassName} 
-                            isActive={() => highlightCurrentTab('tests')} 
+                            isActive={() => highlightCurrentTab('/tests')} 
                             >
                                 Test
                             </NavLink>
                         </span>
                         {
-                            pathname === '/profile/statistics' && <StatisticsTable/>
+                            (highlightCurrentTab('/statistics') || highlightCurrentTab('')) && <StatisticsTable/>
                         }
                         {
-                            pathname === '/profile/threads' && <Threads/>
+                            highlightCurrentTab('/threads') && <Threads/>
                         }
                         {
-                            pathname === '/profile/tests' && <Tests/>
+                            highlightCurrentTab('/tests')  && <Tests/>
                         }
                     
                     </span>
                 </span>
                 <span className={css.rightPart}>
-                    
+                    <Calendar className={css.calendar}/>
                 </span>
             </div>
       
