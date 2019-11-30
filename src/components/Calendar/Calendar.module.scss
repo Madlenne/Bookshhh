@@ -61,11 +61,18 @@
 
 .day {
   padding: 10px 0;
+  position: relative;
 
   &:hover,
   &:focus {
     color: #bb5000;
     cursor: pointer;
+  }
+  font-weight: 400;
+
+  &--highlighted {
+    color: #bb5000;
+    font-weight: 600;
   }
 }
 
@@ -80,10 +87,86 @@
   padding: 0;
 }
 
+.monthItem {
+  &:nth-child(2) {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
 .monthList {
   left: 15%;
   padding: 5%;
   width: 100px;
   height: 150px;
   overflow: scroll;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.dayList {
+  padding: 1%;
+  top: 100px !important;
+}
+
+.eventContainer {
+  display: none;
+
+  &:hover {
+    color: black;
+  }
+
+  &--expanded {
+    display: block;
+    width: 350px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: 1px solid #a7a7a7;
+    position: absolute;
+    top: 50px;
+    z-index: 100;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    grid-template-areas: "title date" "description description";
+    grid-gap: 10px;
+    padding: 70% 90%;
+  }
+}
+
+.title {
+  grid-area: title;
+  font-family: "Modern No. 20";
+  font-size: 28px;
+  color: #bb5000;
+  text-align: left;
+  font-weight: 500;
+}
+
+.workspace {
+  font-size: 22px;
+  color: black;
+  padding-top: 3%;
+  font-weight: 500;
+}
+
+.date {
+  grid-area: date;
+  color: #767676;
+  font-family: "Open Sans";
+  font-weight: 100;
+  font-size: 18px;
+}
+
+.description {
+  grid-area: description;
+  color: rgb(53, 53, 53);
+  font-size: 16px;
+  padding-top: 3%;
+  text-align: left;
+  line-height: 30px;
+  font-weight: 500;
 }

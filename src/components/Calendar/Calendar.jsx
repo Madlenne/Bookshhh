@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import * as PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import moment from 'moment';
 import Dropdown from '../ui/Dropdown/Dropdown.jsx';
+import { useEventListener } from '../../hooks/useEventListener.js';
 
 
 import css from './Calendar.module.scss';
@@ -13,15 +14,23 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+const areDaysEqual = (dayInMs, daysInMs) => {
+  const onlyDay = Math.round(dayInMs / 1000000);
+  const onlyDays = daysInMs.map(day => Math.round(day / 1000000));
+
+  return onlyDays.includes(onlyDay);
+}
 
 const Calendar = ({ className }) => {
   
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
-  const monthName = monthNames[currentMonth];
-  
+  const exampleDates = [new Date('Nov 3, 2019').getTime(), new Date('Nov 15, 2019').getTime()];
+
   const [ pickedMonth, setPickedMonth ] = useState(currentMonth);
+  const [ pickedDay, setPickedDay ] = useState();
+  const monthName = monthNames[pickedMonth];
 
   const monthRenderer = (onClick, ref) => <span  className={css.month} onClick={onClick} ref={ref}>{monthName}  </span>
 
@@ -37,13 +46,13 @@ const Calendar = ({ className }) => {
         }
       }
 
-
       const pickMonth = (index) => {
         setPickedMonth(index);
         }
      
       
-      const pickDate = () => {
+      const pickDate = (index) => {
+        setPickedDay(index);
       }
 
     return(
@@ -59,13 +68,57 @@ const Calendar = ({ className }) => {
             </div>
             <div className={css.days}>
             {
-                days.map((day, index) => <div onClick={pickDate} className={css.day} style={{ gridColumn: column(index) }}> {day.format('D')} </div>)
+
+                days.map((day, index) => {
+                  return(
+                  <>
+                        <div className={cln('day', { 'day--highlighted': areDaysEqual(day.valueOf(), exampleDates) })} style={{ gridColumn: column(index) }} onClick={() => pickDate(index)}> 
+                            { day.format('D') } 
+                          { pickedDay === index && <CalendarEvent isEventExpanded={pickedDay === index}/>}
+                        </div>
+                        </>
+                  )
+                  })
             }
             </div>
-            
+             
         </div>
 
     );
+}
+
+const CalendarEvent = ({isEventExpanded}) => {
+
+  const containerRef = useRef();
+  const [isExpanded, setIsExpanded] = useState(isEventExpanded);
+  const handleOutsideAndOptionClick = (event) => {
+    
+    if(containerRef.current.contains(event.target) ){
+      return;
+    }
+    
+    setIsExpanded(false);
+  }
+  
+  useEventListener('mousedown', handleOutsideAndOptionClick);
+
+  return <div className={cln('eventContainer', {'eventContainer--expanded': isExpanded})} ref={containerRef}>
+    <div className={css.title}>
+      The doll test
+      <div className={css.workspace}>
+        III C
+      </div>
+    </div>
+    <span className={css.date}>
+      15.10.2019
+    </span>
+    <div className={css.description}>
+      Short test about knowledge of ‘The Doll”. 
+      Please expect open-ended questions. 
+      Every of them is marked by its amount 
+      of points to reach.
+    </div>
+  </div>
 }
 
 

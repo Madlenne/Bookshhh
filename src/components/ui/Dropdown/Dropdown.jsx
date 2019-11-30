@@ -9,14 +9,13 @@ import css from './Dropdown.module.scss';
 const cln = classnames.bind(css);
 
 const Dropdown = ({ buttonRenderer, className, arrowPosition, children }) => {
-
     const [isExpanded, setIsExpanded] = useState(false);
     const container = useRef();
     const buttonRendererIcon = useRef();
     const onClick = () => {
         setIsExpanded(isExpanded => !isExpanded);
     }
-
+    
     const handleOutsideAndOptionClick = (event) => {
 
         if(container.current.contains(event.target) || buttonRendererIcon.current.contains(event.target)){
