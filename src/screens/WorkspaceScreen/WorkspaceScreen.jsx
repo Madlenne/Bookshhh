@@ -3,13 +3,15 @@ import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 import WorkspaceCard from '../../components/WorkspaceCard/WorkspaceCard.jsx';
+import TestCard from '../../components/TestCard/TestCard.jsx';
+import Calendar from '../../components/Calendar/Calendar.jsx';
 
 import css from './WorkspaceScreen.module.scss';
-
 
 const WorkspaceScreen = () => {
 
     const workspaces = [1];
+    const name = 'III C';
 
     return(
         <div className={css.container}>
@@ -17,17 +19,19 @@ const WorkspaceScreen = () => {
             <span className={css.content}>
                 <Suggestions/>
                 <span className={css.workspaces}>
-                    <span className={css.title}>
-                        Workspaces
+                   
+                    <span className={css.info}>
+                        <WorkspaceCard variant={'extended'} name='III C'/>
+                        <div className={css.testsList}>
+                            <TestCard testDate={new Date('Dec 10, 2019').getTime()}/>
+                            <TestCard testDate={new Date('Nov 10, 2019').getTime()}/>
+                            <TestCard testDate={new Date('Nov 5, 2019').getTime()}/>
+                        </div>
                     </span>
-                    <span className={css.workspaceCards}>
-                        {workspaces.map((workspaceCard, index) => 
-                            ((index+1) % 4 && index % 4)
-                            ? <WorkspaceCard />
-                            : <WorkspaceCard className={css.workspaceCardClassName}/>
-                        )}
-                        
+                    <span className={css.events}>
+                        <Calendar/>
                     </span>
+
                 </span>
             </span>
 

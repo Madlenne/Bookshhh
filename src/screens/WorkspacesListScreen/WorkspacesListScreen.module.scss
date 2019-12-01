@@ -21,22 +21,30 @@
 .workspaces {
   grid-area: workspaces;
   text-align: left;
-  padding: 0 5%;
+  padding-left: 5%;
+}
+
+.title {
+  font-family: "Modern No. 20";
+  font-size: 40px;
+  color: #9f4600;
+}
+
+.workspaceCards {
+  padding-top: 2%;
+  grid-area: workspaces;
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  grid-template-areas: "info events";
+  grid-gap: 2%;
+  grid-template-columns: repeat(auto-fit, minmax(580px, 5fr));
+  overflow: scroll;
 }
 
-.info {
-  grid-area: info;
-  //   display: flex;
-  //   flex-direction: column;
+.workspaceCardClassName {
+  background-color: rgba(250, 175, 111, 0.1);
 }
 
-.events {
-  grid-area: events;
-}
-
-.testsList {
-  padding-top: 10%;
+.linkItem {
+  outline: none;
+  text-decoration: none;
+  color: inherit;
 }

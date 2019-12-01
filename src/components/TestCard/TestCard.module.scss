@@ -1,0 +1,43 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 0.3fr;
+  grid-template-areas: "data read result";
+  border-bottom: 1px solid #707070;
+  padding-bottom: 1%;
+  padding-top: 5%;
+  width: 93%;
+}
+
+.data {
+  grid-area: data;
+}
+
+.title {
+  font-family: "Modern No. 20";
+  font-size: 23px;
+}
+
+.author {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 15px;
+  padding-top: 1%;
+}
+
+.read {
+  grid-area: read;
+  align-self: end;
+}
+
+.result {
+  grid-area: result;
+  align-self: end;
+  justify-self: end;
+  font-weight: 700;
+}
+
+.exam {
+  grid-area: result;
+  width: 25%;
+  align-self: end;
+  justify-self: end;
+}
