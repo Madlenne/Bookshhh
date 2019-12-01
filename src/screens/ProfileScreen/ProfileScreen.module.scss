@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  grid-template-areas: "profile calendar";
+  grid-template-areas: "profile calendarAndRate";
   padding-top: 2%;
 }
 
@@ -101,17 +101,24 @@
 }
 
 .rightPart {
-  grid-area: calendar;
-  align-self: start;
+  display: grid;
+  grid-area: calendarAndRate;
+  // place-self: start;
+  grid-template-rows: 0.8fr 0.4fr;
+  grid-gap: 5%;
+  grid-template-areas: "calendar" "rate";
 }
 
 .calendar {
   width: 70%;
+  grid-area: calendar;
   margin: auto;
 }
 
 .rateBox {
   grid-area: rate;
-  width: 70%;
+  width: 60%;
+  height: 85%;
   justify-self: end;
+  align-self: end;
 }

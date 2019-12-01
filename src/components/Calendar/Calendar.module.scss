@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 0.1fr 1fr;
+  grid-template-rows: 0.1fr 0.4fr;
   grid-template-areas: "monthAndYear" "days";
   grid-gap: 20px;
   background-color: #fafafa;

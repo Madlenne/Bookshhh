@@ -77,7 +77,9 @@ const ProfileScreen = () => {
                 </span>
                 <span className={css.rightPart}>
                     <Calendar className={css.calendar}/>
+                <RateBox className={css.rateBox}/>
                 </span>
+                
             </div>
       
         </div>
