@@ -144,12 +144,14 @@
   color: #bb5000;
   text-align: left;
   font-weight: 500;
+  border-bottom: 1px solid #9c9c9c;
 }
 
 .workspace {
   font-size: 22px;
-  color: black;
-  padding-top: 3%;
+  color: #1a1a1a;
+  padding-top: 4%;
+  padding-bottom: 5%;
   font-weight: 500;
 }
 
@@ -163,7 +165,35 @@
 
 .description {
   grid-area: description;
-  color: rgb(53, 53, 53);
+  color: rgb(61, 61, 61);
+  font-size: 16px;
+  padding-top: 3%;
+  text-align: left;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.title2 {
+  grid-area: title;
+  font-family: "Modern No. 20";
+  font-size: 28px;
+  color: rgba(26, 26, 26, 0.55);
+  text-align: left;
+  font-weight: 500;
+  border-bottom: 1px solid #9c9c9c;
+}
+
+.workspace2 {
+  font-size: 22px;
+  padding-top: 4%;
+  padding-bottom: 5%;
+  font-weight: 500;
+  color: rgba(26, 26, 26, 0.45);
+}
+
+.description2 {
+  grid-area: description;
+  color: rgba(26, 26, 26, 0.55);
   font-size: 16px;
   padding-top: 3%;
   text-align: left;
