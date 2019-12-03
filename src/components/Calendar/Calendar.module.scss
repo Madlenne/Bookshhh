@@ -131,7 +131,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 2fr;
-    grid-template-areas: "title date" "description description";
+    grid-template-areas: "title date" "description add";
     grid-gap: 10px;
     padding: 70% 90%;
   }
@@ -173,30 +173,61 @@
   font-weight: 500;
 }
 
+.titles {
+  grid-area: title;
+}
+
 .title2 {
   grid-area: title;
   font-family: "Modern No. 20";
   font-size: 28px;
   color: rgba(26, 26, 26, 0.55);
   text-align: left;
-  font-weight: 500;
-  border-bottom: 1px solid #9c9c9c;
+  font-weight: 400;
+  border: 0;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .workspace2 {
-  font-size: 22px;
+  font-size: 21px;
   padding-top: 4%;
   padding-bottom: 5%;
-  font-weight: 500;
+  font-weight: 300;
+  font-family: "Modern No. 20";
+  border: 0;
+  border-bottom: 1px solid #a0a0a0;
   color: rgba(26, 26, 26, 0.45);
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .description2 {
   grid-area: description;
   color: rgba(26, 26, 26, 0.55);
   font-size: 16px;
-  padding-top: 3%;
   text-align: left;
   line-height: 30px;
-  font-weight: 500;
+  font-weight: 300;
+  border: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.addButton {
+  width: 30%;
+  grid-area: add;
+  align-self: end;
+  justify-self: end;
+  transition: width 0.3s;
+
+  &:hover {
+    width: 35%;
+  }
 }

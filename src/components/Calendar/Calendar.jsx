@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import * as PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
+import Add from '../../icons/add.png';
 import moment from 'moment';
 import Dropdown from '../ui/Dropdown/Dropdown.jsx';
 import { useEventListener } from '../../hooks/useEventListener.js';
@@ -151,18 +152,17 @@ const CalendarEventCreator = ({date, isEventExpanded}) => {
   useEventListener('mousedown', handleOutsideAndOptionClick);
 
   return <div className={cln('eventContainer', {'eventContainer--expanded': isExpanded})} ref={containerRef}>
-    <div className={css.title2}>
-      Type a title...
-      <div className={css.workspace2}>
-        Any workspace?
-      </div>
+    <div className={css.titles}>
+     <input type="text" className={css.title2} placeholder="Type a title..." />
+      {/* <div className={css.workspace2}> */}
+       <input type="text" className={css.workspace2} placeholder="Any workspace?" /> 
+      {/* </div> */}
     </div>
     <span className={css.date}>
       {`${day}.${month}.${year}`}
     </span>
-    <div className={css.description2}>
-      Type a description...
-    </div>
+    <input type="text" className={css.description2} placeholder="Type a description..." />
+    <img src={Add} className={css.addButton} alt="png"/>
   </div>
 }
 
