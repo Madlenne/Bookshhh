@@ -29,14 +29,22 @@
 
 .info {
   grid-area: info;
-  //   display: flex;
-  //   flex-direction: column;
 }
 
 .events {
   grid-area: events;
 }
 
+.upcomingEvents {
+  border-bottom: 1px solid #707070;
+  padding-top: 5%;
+  padding-bottom: 2%;
+}
+
 .testsList {
   padding-top: 10%;
+}
+
+.grayBackground {
+  background-color: rgb(250, 250, 250);
 }
