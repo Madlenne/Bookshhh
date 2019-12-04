@@ -8,6 +8,7 @@ import GenreScreen from './screens/GenreScreen/GenreScreen.jsx';
 import Top10Screen from './screens/Top10Screen/Top10Screen.jsx';
 import NewsScreen from './screens/NewsScreen/NewsScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen.jsx';
+import BookScreen from './screens/BookScreen/BookScreen.jsx';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/genres" component={GenreScreen} />
         <Route exact path="/workspaces" component={WorkspacesListScreen} />
         <Route path="/workspaces/:workspace" component={WorkspaceScreen} />
+        <Route path="/book/:id" component={BookScreen} />
         <Route exact path="/news" component={NewsScreen} />
         <Route path="/library" component={LibraryScreen} />
         <Route path="/profile" component={ProfileScreen} />

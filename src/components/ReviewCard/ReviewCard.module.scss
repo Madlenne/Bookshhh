@@ -1,0 +1,60 @@
+.container {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 0.2fr;
+  grid-template-areas: "avatar review grade";
+  border-bottom: 1px solid #707070;
+  padding-bottom: 2%;
+  padding-top: 5%;
+  margin: 1% 0;
+  justify-items: center;
+}
+
+.userInfo {
+  grid-area: avatar;
+  font-family: "Open Sans";
+  font-size: 16px;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 25%;
+  padding-bottom: 7px;
+}
+
+.reviews {
+  grid-area: review;
+  font-family: "Open Sans";
+}
+
+.title {
+  color: #ac5615;
+  font-size: 18px;
+  padding-bottom: 1%;
+}
+
+.comment {
+  font-size: 14px;
+}
+
+.grade {
+  grid-area: grade;
+  align-self: center;
+  font-family: "Open Sans";
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.up {
+  transform: rotate(180deg);
+  width: 20%;
+}
+
+.down {
+  width: 20%;
+}

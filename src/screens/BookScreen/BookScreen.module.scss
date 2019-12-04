@@ -1,0 +1,78 @@
+.container {
+  display: grid;
+  grid-template-rows: 100px auto;
+  grid-template-columns: auto;
+  grid-template-areas: "header" "rest";
+  grid-gap: 50px;
+  min-height: 100%;
+  background: linear-gradient(90deg, #242424 18%, #ffffff 18%);
+  top: 0;
+  left: 0;
+}
+
+.content {
+  grid-area: rest;
+  display: grid;
+  grid-template-columns: 0.87fr 4fr;
+  grid-template-areas: "suggestions details";
+}
+
+.details {
+  grid-area: details;
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  display: grid;
+  grid-template-rows: 0.5fr auto;
+  grid-template-areas: "card" "reviews";
+  grid-gap: 10px;
+}
+
+.bookCard {
+  grid-area: card;
+  display: grid;
+  grid-template-columns: 0.3fr 2fr;
+  grid-template-rows: 0.2fr 0.2fr;
+  grid-template-areas: "cover title" "cover description";
+  grid-gap: 3%;
+  background-color: #fafafa;
+  padding: 3%;
+}
+
+.cover {
+  grid-area: cover;
+  align-self: center;
+
+  width: 80%;
+}
+
+.title {
+  grid-area: title;
+  font-family: "Modern No. 20";
+  font-size: 30px;
+  color: #9f4600;
+}
+
+.author {
+  grid-area: title;
+  align-self: end;
+  font-family: "Open Sans";
+  color: rgba(3, 3, 3, 0.9);
+  font-size: 16px;
+  padding-top: 1%;
+}
+
+.description {
+  grid-area: description;
+  align-self: center;
+  color: #707070;
+  padding-top: 3%;
+}
+
+.reviews {
+  font-family: "Modern No. 20";
+  grid-area: reviews;
+  font-size: 26px;
+  padding-top: 5%;
+}

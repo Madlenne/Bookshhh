@@ -154,9 +154,7 @@ const CalendarEventCreator = ({date, isEventExpanded}) => {
   return <div className={cln('eventContainer', {'eventContainer--expanded': isExpanded})} ref={containerRef}>
     <div className={css.titles}>
      <input type="text" className={css.title2} placeholder="Type a title..." />
-      {/* <div className={css.workspace2}> */}
        <input type="text" className={css.workspace2} placeholder="Any workspace?" /> 
-      {/* </div> */}
     </div>
     <span className={css.date}>
       {`${day}.${month}.${year}`}
