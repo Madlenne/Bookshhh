@@ -170,7 +170,7 @@
   padding-top: 3%;
   text-align: left;
   line-height: 30px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .titles {
@@ -178,13 +178,14 @@
 }
 
 .title2 {
-  grid-area: title;
+  // grid-area: title;
   font-family: "Modern No. 20";
   font-size: 28px;
   color: rgba(26, 26, 26, 0.55);
   text-align: left;
   font-weight: 400;
   border: 0;
+  background-color: rgba(255, 255, 255, 0.1);
 
   &:focus {
     outline: none;
@@ -200,6 +201,7 @@
   border: 0;
   border-bottom: 1px solid #a0a0a0;
   color: rgba(26, 26, 26, 0.45);
+  background-color: rgba(255, 255, 255, 0.1);
 
   &:focus {
     outline: none;
@@ -214,6 +216,7 @@
   line-height: 30px;
   font-weight: 300;
   border: 0;
+  background-color: rgba(255, 255, 255, 0.1);
 
   &:focus {
     outline: none;

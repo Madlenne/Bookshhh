@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 import WorkspaceCard from '../../components/WorkspaceCard/WorkspaceCard.jsx';
-import { NavLink, useLocation } from 'react-router-dom';
 
 import css from './WorkspacesListScreen.module.scss';
 
@@ -12,9 +11,6 @@ const WorkspacesListScreen = () => {
 
     const workspaces = [1];
     const name = 'IIIC';
-
-    const {pathname} = useLocation();
-    console.log(pathname);
 
     return(
         <div className={css.container}>

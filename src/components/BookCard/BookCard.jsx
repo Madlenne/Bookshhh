@@ -3,12 +3,18 @@ import * as  PropTypes from 'prop-types';
 import Cover from '../../icons/the_shining_cover.jpg';
 import Stars from '../ui/Stars/Stars.jsx';
 import css from './BookCard.module.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, generatePath } from 'react-router-dom';
 
 
 const BookCard = ({ hasStartedReading, title }) => {
+    const {pathname} =  useLocation();
+    
+    const path = generatePath("/book/:id", {
+        id: title
+    });
+    
     return(
-        <NavLink to={`book/${title}`} className={css.linkItem} >
+        <NavLink to={path} className={css.linkItem} >
             <div className={css.container}>
                 <img src={Cover} className={css.cover} alt='bookCover'/>
                 <span className={css.info}>
