@@ -103,3 +103,53 @@
 .activeClassName {
   color: #9f4600;
 }
+
+.loginDropdown {
+  padding: 10px 20px;
+}
+
+.loginIcon {
+  width: 12%;
+}
+
+.loginItem {
+  &:not(:last-child) {
+    padding-bottom: 15px;
+  }
+}
+
+.loginInput {
+  border: 0;
+  border-bottom: 1px solid rgb(87, 86, 86);
+  padding-bottom: 5px;
+  font-size: 15px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.loginButton {
+  padding: 5px 10px;
+  background-color: white;
+  border: 0;
+  border: 1px solid rgb(211, 211, 211);
+  color: #9f4600;
+  font-size: 13px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #fafafa;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.register {
+  color: #9f4600;
+  font-size: 12px;
+  &:hover {
+    color: #d16512;
+  }
+}
