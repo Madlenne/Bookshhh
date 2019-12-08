@@ -1,8 +1,9 @@
-import React from 'react'
+/* eslint-disable max-lines-per-function */
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import RateBox from '../../components/RateBox/RateBox.jsx';
-import Calendar from '../../components/Calendar/Calendar.jsx';
+import { Calendar } from '../../components/Calendar/Calendar.jsx';
 import { NavLink, useLocation } from 'react-router-dom';
 import Avatar from './woman-avatar.png';
 import css from './ProfileScreen.module.scss';
@@ -18,12 +19,9 @@ const ProfileScreen = () => {
 
     console.log(pathname);
 
-    const highlightCurrentTab = (tabName) => {
-        const { pathname } = location;
-        return pathname === `/profile${tabName}`;
-    }
+    const highlightCurrentTab = tabName => pathname === `/profile${tabName}`;
 
-    return(
+    return (
         <div className={css.container}>
             <Header/>
             <div className={css.content}>
@@ -38,27 +36,27 @@ const ProfileScreen = () => {
                     </span>
                     <span className={css.userActivity}>
                         <span className={css.tabs}>
-                            <NavLink 
-                            to='/profile/statistics' 
+                            <NavLink
+                            to="/profile/statistics"
                             className={css.tab}
-                            activeClassName={css.activeClassName} 
-                            isActive={() => highlightCurrentTab('/statistics') || highlightCurrentTab('')} 
+                            activeClassName={css.activeClassName}
+                            isActive={() => highlightCurrentTab('/statistics') || highlightCurrentTab('')}
                             >
                                 Statistics
                             </NavLink>
-                            <NavLink 
-                            to='/profile/threads' 
+                            <NavLink
+                            to="/profile/threads"
                             className={css.tab}
-                            activeClassName={css.activeClassName} 
-                            isActive={() => highlightCurrentTab('/threads')} 
+                            activeClassName={css.activeClassName}
+                            isActive={() => highlightCurrentTab('/threads')}
                             >
                                 Latest threads
                             </NavLink>
-                            <NavLink 
-                            to='/profile/tests' 
+                            <NavLink
+                            to="/profile/tests"
                             className={css.tab}
-                            activeClassName={css.activeClassName} 
-                            isActive={() => highlightCurrentTab('/tests')} 
+                            activeClassName={css.activeClassName}
+                            isActive={() => highlightCurrentTab('/tests')}
                             >
                                 Test
                             </NavLink>
@@ -70,7 +68,7 @@ const ProfileScreen = () => {
                             highlightCurrentTab('/threads') && <Threads/>
                         }
                         {
-                            highlightCurrentTab('/tests')  && <Tests/>
+                            highlightCurrentTab('/tests') && <Tests/>
                         }
                     
                     </span>
@@ -85,6 +83,6 @@ const ProfileScreen = () => {
         </div>
 
     );
-}
+};
 
 export default ProfileScreen;

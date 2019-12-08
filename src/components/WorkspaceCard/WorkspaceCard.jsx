@@ -1,7 +1,5 @@
 import React from 'react'
 import * as PropTypes from 'prop-types';
-import Header from '../Header/Header.jsx';
-import Suggestions from '../Suggestions/Suggestions.jsx';
 import Group from '../../icons/group.png';
 import Thumbnail from '../../icons/graduation-hat.png';
 import classnames from 'classnames/bind';

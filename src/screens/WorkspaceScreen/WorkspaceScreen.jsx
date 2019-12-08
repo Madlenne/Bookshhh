@@ -1,24 +1,24 @@
-import React from 'react'
+/* eslint-disable no-ternary */
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 import WorkspaceCard from '../../components/WorkspaceCard/WorkspaceCard.jsx';
 import TestCard from '../../components/TestCard/TestCard.jsx';
 import EventCard from '../../components/EventCard/EventCard.jsx';
-import Calendar from '../../components/Calendar/Calendar.jsx';
+import { Calendar } from '../../components/Calendar/Calendar.jsx';
 
 import css from './WorkspaceScreen.module.scss';
 
 const WorkspaceScreen = () => {
 
-    const workspaces = [1];
     const name = 'III C';
 
     const events = [1, 2];
 
-    return(
+    return (
         <div className={css.container}>
-            <Header mode='dark'/>
+            <Header mode="dark"/>
             <span className={css.content}>
                 <Suggestions/>
                 <span className={css.workspaces}>
@@ -36,9 +36,9 @@ const WorkspaceScreen = () => {
                         <div className={css.upcomingEvents}>
                             Upcoming events
                         </div>
-                        {events.map((event, index) => index % 2 
-                        ? <EventCard title='The Doll test' className={css.grayBackground}/> 
-                        :  <EventCard title='Macbeth essay' />)}
+                        {events.map((event, index) => (index % 2
+                        ? <EventCard title="The Doll test" className={css.grayBackground}/>
+                        : <EventCard title="Macbeth essay" />))}
                             
                     </span>
 
@@ -48,6 +48,6 @@ const WorkspaceScreen = () => {
         </div>
 
     );
-}
+};
 
 export default WorkspaceScreen;
