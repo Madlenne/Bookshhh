@@ -128,6 +128,16 @@
   }
 }
 
+.loginFailureInput {
+  border-bottom: 1px solid rgb(243, 59, 59);
+  color: rgb(243, 59, 59);
+}
+
+.wrongCredentials {
+  color: rgb(243, 59, 59);
+  font-size: 13px;
+}
+
 .loginButton {
   padding: 5px 10px;
   background-color: white;
@@ -144,6 +154,11 @@
   &:focus {
     outline: none;
   }
+}
+
+.loginFailureButton {
+  // border: 1px solid rgb(243, 59, 59);
+  color: rgb(243, 59, 59);
 }
 
 .register {

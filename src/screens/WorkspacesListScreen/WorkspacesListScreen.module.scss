@@ -41,6 +41,10 @@
 
 .workspaceCardClassName {
   background-color: rgba(250, 175, 111, 0.1);
+
+  &:hover {
+    background-color: rgba(250, 176, 111, 0.151);
+  }
 }
 
 .linkItem {

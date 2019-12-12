@@ -25,7 +25,7 @@ const VerticalCalendar = ({ className }) => {
     const currentDay = currentDate.getDate();
     const days = [];
 
-    const exampleDates = [new Date('Nov 3, 2019'), new Date('Nov 15, 2019'), new Date('Dec 10, 2019')];
+    const exampleDates = [new Date('Nov 3, 2019'), new Date('Nov 15, 2019'), new Date('Dec 15, 2019')];
 
 
     const [clickedDay, setClickedDay] = useState(currentDay);

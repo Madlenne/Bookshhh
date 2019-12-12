@@ -12,9 +12,7 @@ const cln = classnames.bind(css);
 
 const GenreCard = ({ type, className }) => {
     const { pathname } = useLocation();
-    const lastSlash = pathname.lastIndexOf('/');
-    const genre = pathname.substring(lastSlash);
-    console.log(genre);
+  
     return(
         <NavLink to={`${pathname}/${type}`} className={css.linkItem}>
             <div className={cln('container', className)}>

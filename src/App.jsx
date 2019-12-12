@@ -10,11 +10,16 @@ import Top10Screen from './screens/Top10Screen/Top10Screen.jsx';
 import NewsScreen from './screens/NewsScreen/NewsScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen.jsx';
 import BookScreen from './screens/BookScreen/BookScreen.jsx';
-
+import { firebaseConfig } from './firebaseConfig.js';
 import './App.css';
 
-function App() {
-  return (
+import * as firebase from 'firebase';
+  
+  function App() {
+    firebase.initializeApp(firebaseConfig);
+    
+  
+return (
     <div className="App">
       <Router>
         <Route exact path="/" component={WelcomeScreen} />
