@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-rows: 0.2fr 2fr 0.6fr;
+  grid-template-rows: 100px 2fr 0.6fr;
   grid-template-columns: auto;
   grid-template-areas: "header" "rest";
   grid-gap: 20px;
@@ -28,7 +28,7 @@
   padding-right: 5%;
 }
 
-.title2 {
+.title {
   font-family: "Modern No. 20";
   font-size: 40px;
   color: #9f4600;

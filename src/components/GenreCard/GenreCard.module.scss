@@ -1,7 +1,7 @@
 .container {
   background-color: #fafafa;
   display: grid;
-  grid-template-columns: 0.4fr 0.2fr 0.4fr;
+  grid-template-columns: 100px 0.2fr 0.4fr;
   grid-template-areas: "image info amount";
   justify-content: space-between;
   grid-gap: 10%;
@@ -14,7 +14,7 @@
 
 .thumbnail {
   grid-area: image;
-  width: 90px;
+  width: 80px;
   align-self: center;
 }
 

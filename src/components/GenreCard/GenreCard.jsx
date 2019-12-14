@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import Header from '../Header/Header.jsx';
 import Suggestions from '../Suggestions/Suggestions.jsx';
@@ -10,13 +10,13 @@ import css from './GenreCard.module.scss';
 
 const cln = classnames.bind(css);
 
-const GenreCard = ({ type, className }) => {
+const GenreCard = ({ type, thumbnail, className }) => {
     const { pathname } = useLocation();
   
-    return(
+    return (
         <NavLink to={`${pathname}/${type}`} className={css.linkItem}>
             <div className={cln('container', className)}>
-                <img src={Thumbnail} className={css.thumbnail} alt='thumbnail' />
+                <img src={thumbnail} className={css.thumbnail} alt="thumbnail" />
             <span className={css.info}>
                 { type }
             </span>
@@ -27,6 +27,6 @@ const GenreCard = ({ type, className }) => {
             </div>
         </NavLink>
     );
-}
+};
 
 export default GenreCard;

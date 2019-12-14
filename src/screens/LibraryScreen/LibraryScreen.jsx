@@ -15,7 +15,7 @@ const LibraryScreen = () => {
                 <span className={css.myLibrary}>
                     <span className={css.title2}>
                         My Library
-                        <BookCard title="The Big Four" hasStartedReading/>
+                        <BookCard title="The Big Four" author="Agatha Christie" hasStartedReading/>
                     </span>
                 </span>
             </span>
