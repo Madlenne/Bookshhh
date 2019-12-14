@@ -20,7 +20,8 @@ const GenreScreen = () => {
     const [isFetching, setIsFetching] = useState(false);
 
      const API = 'https://www.googleapis.com/books/v1/volumes?q=subject:';
-    const query = `${API }Fiction&key=AIzaSyA3izPXs8UVa0mopS54Cyym0v21IOGIVjk`;
+    const query = `${API}${genre}&maxResults=20&key=AIzaSyA3izPXs8UVa0mopS54Cyym0v21IOGIVjk`;
+
     useEffect(() => {
 
        setIsFetching(true);
@@ -40,7 +41,6 @@ const GenreScreen = () => {
        }
        fetchData();
     }, []);
-    console.log(items);
     
 return (
         <div className={css.container} >
@@ -53,11 +53,7 @@ return (
                     { isFetching || !items
                     ? <Loader/>
                     : items.map(item => <BookCard itemFromAPI={item}/>)}
-                        {/* <BookCard itemsFromAPI={items} hasStartedReading/>
-                        <BookCard itemsFromAPI={items}/>
-                        <BookCard itemsFromAPI={items}/> */}
-                    {/* // </>  */}
-                {/* } */}
+                        
                 </span>
 
             </span>

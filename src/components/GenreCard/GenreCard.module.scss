@@ -1,14 +1,14 @@
 .container {
   background-color: #fafafa;
   display: grid;
-  grid-template-columns: 100px 0.2fr 0.4fr;
+  grid-template-columns: 0.2fr 0.2fr 0.4fr;
   grid-template-areas: "image info amount";
   justify-content: space-between;
   grid-gap: 10%;
   padding: 40px;
 
   @media screen and (max-width: 1516px) {
-    width: 300px;
+    width: 315px;
   }
 }
 

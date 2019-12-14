@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 import Stars from '../ui/Stars/Stars.jsx';
 import { get } from 'lodash';
+import DefaultThumbnail from '../../icons/cover_placeholder.png';
 import css from './BookCard.module.scss';
 import { NavLink, useLocation, generatePath } from 'react-router-dom';
 
-const generateSlug = phrase => phrase.split(' ').join('+');
 
 const BookCard = ({ hasStartedReading, itemFromAPI }) => {
 
@@ -17,73 +17,34 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
     const [thumbnail, setThumbnail] = useState();
     const [author, setAuthor] = useState();
     const [title, setTtile] = useState(' ');
+    const [id, setId] = useState('1');
 
     useEffect(() => {
         setItem(itemFromAPI);
     }, [itemFromAPI]);
-    // const API = 'https://www.googleapis.com/books/v1/volumes?q=intitle:&key=AIzaSyA3izPXs8UVa0mopS54Cyym0v21IOGIVjk';
-    // const query = API + generateSlug(title) + '+inauthor:'+ generateSlug(author);
-    // useEffect( () => {
-    //    async function fetchData() {
-    //        await fetch(query)
-    //             .then(response => response.json())
-    //             .then((data) => {
-    //                 console.log('DATA ', data);
-    //                 setItems(data.items[0]);
-    //                 // const shortDescription = data.items[0].volumeInfo.description.substring(0, 300);
-    //                 // const smallThumbnail = data.items[0].volumeInfo.imageLinks.smallThumbnail;
-    //                 // setDescription(shortDescription);
-    //                 // setThumbnail(smallThumbnail);
 
-    //         }).catch(error => {
-    //             console.error(error);
-    //         });
-    //    } 
-    //    fetchData();
-    // }, [])
-    // console.log(items);
     
     useEffect(() => {
         if (item){
             const shortDescription = get(item, 'volumeInfo.description', 'No description');
-            // substring(0, 300);
             setDescription(shortDescription.substring(0, 300));
 
-            const {smallThumbnail} = item.volumeInfo.imageLinks;
+            const smallThumbnail = get(item, 'volumeInfo.imageLinks.smallThumbnail', DefaultThumbnail);
             setThumbnail(smallThumbnail);
 
-            const {title} = item.volumeInfo;
+            const { title } = item.volumeInfo;
             setTtile(title);
 
-            const author = item.volumeInfo.authors[0];
-            setAuthor(author);
+            const authors = get(item, 'volumeInfo.authors[0]', 'Unknown author');
+            setAuthor(authors);
+
+            setId(item.id);
 
         }
     }, [item]);
 
-
-    // setDescription(() => {
-    //     if(items){
-    //         setIsFetching(false);
-    //         return items.volumeInfo.description.substring(0, 300);
-    //     }
-    //     else{
-    //         setIsFetching(true);
-    //     }
-    // }, [])
-
-    // setThumbnail(() => {
-    //     if(items){
-    //         setIsFetching(false);
-    //         return items.volumeInfo.imageLinks.smallThumbnail
-    //     }
-    //     else{
-    //         setIsFetching(true);
-    //     }
-    // }, [])
-    
     const path = generatePath('/book/:id', {
-        "id": title
+        id
     });
     
     return (
@@ -124,11 +85,12 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
 };
 
 BookCard.propTypes = {
-    "hasStartedReading": PropTypes.string
+    'hasStartedReading': PropTypes.string,
+    'itemFromAPI': PropTypes.object.isRequired
 };
 
 BookCard.defaultProps = {
-    "hasStartedReading": false
+    'hasStartedReading': false
 };
 
 export default BookCard;
