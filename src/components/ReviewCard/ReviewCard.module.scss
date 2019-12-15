@@ -4,9 +4,10 @@
   grid-template-areas: "avatar review grade";
   border-bottom: 1px solid #707070;
   padding-bottom: 2%;
-  padding-top: 5%;
+  padding-top: 3%;
   margin: 1% 0;
   justify-items: center;
+  grid-gap: 10px;
 }
 
 .userInfo {
@@ -21,13 +22,14 @@
 }
 
 .avatar {
-  width: 25%;
+  width: 30px;
   padding-bottom: 7px;
 }
 
 .reviews {
   grid-area: review;
   font-family: "Open Sans";
+  justify-self: start;
 }
 
 .title {
@@ -36,8 +38,28 @@
   padding-bottom: 1%;
 }
 
+.newTitle,
+.newComment {
+  border: 0;
+  font-size: 18px;
+  color: #ac5615;
+  margin-bottom: 2%;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid black;
+  }
+}
+
 .comment {
   font-size: 14px;
+}
+
+.newComment {
+  font-size: 14px;
+  color: black;
+  height: 2vh;
+  width: 50vw;
+  padding-bottom: 1%;
 }
 
 .grade {
@@ -53,8 +75,26 @@
 .up {
   transform: rotate(180deg);
   width: 20%;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .down {
   width: 20%;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.addButton {
+  width: 20%;
+  transition: width 0.3s;
+
+  &:hover {
+    width: 25%;
+    cursor: pointer;
+  }
 }

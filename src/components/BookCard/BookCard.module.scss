@@ -64,6 +64,31 @@
   align-self: center;
 }
 
+.added {
+  grid-area: progress;
+  align-self: center;
+  font-size: 14px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  color: #9f4600;
+}
+
+.toAdd {
+  grid-area: progress;
+  align-self: center;
+  font-size: 14px;
+  font-family: "Open Sans";
+  font-weight: 500;
+  color: #9f4600;
+  z-index: 10000;
+  text-decoration: none;
+
+  :hover {
+    font-weight: 600;
+    border: 1px solid red;
+  }
+}
+
 .bookGenre {
   grid-area: progress;
   align-self: center;

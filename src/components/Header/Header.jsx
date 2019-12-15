@@ -30,12 +30,13 @@ const Header = ({ mode }) => {
     const location = useLocation();
 
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoginFailed, setIsLoginFailed] = useState(false);
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [shouldShowRegisterModal, setShouldShowRegisterModal] = useState(false);
-
+    
     const highlightCurrentTab = tabName => {
         const { pathname } = location;
         
@@ -49,22 +50,35 @@ const Header = ({ mode }) => {
     const logInButtonRenderer = (onClick, ref) => <img src={LogIn}
     className={css.loginIcon}
     onClick={ () => {
-    onClick(); setShouldShowRegisterModal(false);
+    onClick();
+    setShouldShowRegisterModal(false);
     }}
     ref={ref} alt="logInIcon"/>;
 
     const logIn = () => {
-        firebase.auth().signInWithEmailAndPassword(username, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+        setUsername('');
+                setEmail('');
+                setPassword('');
+        })
         .catch(error => {
             setIsLoginFailed(true);
-             console.error( error.code, error.message);
+             console.error(error.code, error.message);
      
           });
           
     };
 
     const signUp = () => {
-        firebase.auth().createUserWithEmailAndPassword(username, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(result => {
+            setUsername('');
+            setEmail('');
+            setPassword('');
+           
+return result.user.updateProfile({ 'displayName': username });
+        })
         .catch(error => {
             
             console.error(error);
@@ -74,17 +88,17 @@ const Header = ({ mode }) => {
 
     const logOut = () => {
         firebase.auth().signOut()
-        .catch((error) => {
+        .catch(error => {
             console.error(error);
 
         });
-    }
-
+    };
+    // console.log(username, email, password);
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
           setIsLoggedIn(true);
 
-          user.getIdTokenResult().then((idTokenResult) => {
+          user.getIdTokenResult().then(idTokenResult => {
 
             const authTime = idTokenResult.claims.auth_time * 1000;
             const sessionDuration = SESSION_DURATION;
@@ -98,9 +112,10 @@ const Header = ({ mode }) => {
 
         }
       });
-    const renderLoginModal = () => <Dropdown key={isLoggedIn} buttonRenderer={logInButtonRenderer} arrowPosition={72} className={css.loginDropdown}>
+    const renderLoginModal = () => <Dropdown buttonRenderer={logInButtonRenderer} arrowPosition={72} className={css.loginDropdown}>
+
         <Dropdown.Item itemKey="Login" className={css.loginItem}>
-            <input type="text" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={username} onChange={event => setUsername(event.target.value)} placeholder="Login"/>
+            <input type="text" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={email} onChange={event => setEmail(event.target.value)} placeholder="Email"/>
         </Dropdown.Item>
 
         <Dropdown.Item itemKey="Password" className={css.loginItem}>
@@ -124,6 +139,10 @@ const Header = ({ mode }) => {
              <Dropdown.Item itemKey="Login" className={css.loginItem}>
                  <input type="text" className={css.loginInput} onChange={event => setUsername(event.target.value)} placeholder="Login"/>
              </Dropdown.Item>
+
+             <Dropdown.Item itemKey="Login" className={css.loginItem}>
+                <input type="text" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={email} onChange={event => setEmail(event.target.value)} placeholder="Email"/>
+            </Dropdown.Item>
 
              <Dropdown.Item itemKey="Password" className={css.loginItem}>
                  <input type="password" className={css.loginInput} onChange={event => setPassword(event.target.value)} placeholder="Password"/>

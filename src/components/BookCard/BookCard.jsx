@@ -1,3 +1,4 @@
+/* eslint-disable no-ternary */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
@@ -7,6 +8,7 @@ import { get } from 'lodash';
 import DefaultThumbnail from '../../icons/cover_placeholder.png';
 import css from './BookCard.module.scss';
 import { NavLink, useLocation, generatePath } from 'react-router-dom';
+import * as firebase from 'firebase/app';
 
 
 const BookCard = ({ hasStartedReading, itemFromAPI }) => {
@@ -18,6 +20,25 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
     const [author, setAuthor] = useState();
     const [title, setTtile] = useState(' ');
     const [id, setId] = useState('1');
+
+    const [isAddedToMyLibrary, setIsAddedToMyLibrary] = useState();
+
+    let displayName;
+    if (firebase.auth().currentUser) ({ displayName } = firebase.auth().currentUser);
+
+    useEffect(() => {
+        firebase.firestore().collection('myLibrary')
+        .where('bookId', '==', id)
+        .onSnapshot(book => {
+
+            const myBook = book.docs.map(doc => doc.data());
+
+            if (myBook.length){
+                setIsAddedToMyLibrary(true);
+            }
+        });
+       
+    }, [id]);
 
     useEffect(() => {
         setItem(itemFromAPI);
@@ -43,6 +64,20 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
         }
     }, [item]);
 
+    const addToMyLibrary = event => {
+        event.stopPropagation();
+        console.log('aa');
+        // firebase.firestore().collection('myLibrary')
+        // .add({
+        //     'bookId': id,
+        //     'grade': 0,
+        //     'userId': displayName
+        //     })
+        // .then(ref => {
+        //         console.log('Added document with ID: ', ref.id);
+        //     });
+    };
+
     const path = generatePath('/book/:id', {
         id
     });
@@ -63,15 +98,26 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
 
                     <div className={css.rate}>
                         Grade!
-                        <Stars/>
+                        <NavLink to={pathname}>
+                            <Stars/>
+                        </NavLink>
                     </div>
-                    {hasStartedReading
+                    {/* {hasStartedReading
                     ? <div className={css.progress}>
                             Read in: <b> 100% </b>
                         </div>
                     : <div className={css.bookGenre}>
                         CRIME NOVEL
                     </div>
+                } */}
+                { isAddedToMyLibrary
+                ? <div className={css.added} onClick={addToMyLibrary}>
+                    ADDED TO MY LIBRARY
+                </div>
+                : <NavLink to={pathname} className={css.toAdd} onClick={addToMyLibrary} >
+                    ADD TO MY LIBRARY
+                </NavLink>
+
                 }
 
                 </span>
