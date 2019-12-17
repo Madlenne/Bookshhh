@@ -52,3 +52,17 @@
   text-decoration: none;
   color: inherit;
 }
+
+.addButton {
+  width: 2%;
+  // grid-area: review;
+  align-self: start;
+  justify-self: start;
+  transition: width 0.3s;
+  padding-left: 20px;
+
+  &:hover {
+    width: 2.5%;
+    cursor: pointer;
+  }
+}

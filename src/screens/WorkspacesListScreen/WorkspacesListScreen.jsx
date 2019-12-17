@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 import WorkspaceCard from '../../components/WorkspaceCard/WorkspaceCard.jsx';
 import Loader from '../../components/ui/Loader/Loader.jsx';
+import Add from '../../icons/add.png';
 
 import css from './WorkspacesListScreen.module.scss';
 import * as firebase from 'firebase/app';
@@ -14,6 +15,7 @@ import * as firebase from 'firebase/app';
 const WorkspacesListScreen = () => {
 
     const [workspaces, setWorkspaces] = useState([]);
+    const [workspaceCreatingMode, setWorkspaceCreatingMode] = useState(false);
     const name = 'IIIC';
 
     useEffect(() => {
@@ -25,19 +27,9 @@ const WorkspacesListScreen = () => {
        
 }, []);
 
-    const addWorkspace = () => {
-
-        const addDoc = firebase.firestore().collection('workspaces')
-    .add({
-        'description': 'For those whose life is too sweet and calm',
-        'members': 1,
-        'name': 'Thrill lovers'
-        })
-    .then(ref => {
-            console.log('Added document with ID: ', ref.id);
-        });
-
-    };
+const createWorkspace = () => {
+    setWorkspaceCreatingMode(mode => !mode);
+};
 
 return (
         <div className={css.container}>
@@ -47,8 +39,11 @@ return (
                 <span className={css.workspaces}>
                     <span className={css.title}>
                         Workspaces
+                        <img src={Add} onClick={createWorkspace} className={css.addButton} alt="png"/>
+
                     </span>
                     <span className={css.workspaceCards}>
+                   {workspaceCreatingMode && <WorkspaceCard variant="creating"/>}
                         { workspaces.length === 0
                         ? <Loader/>
                         : workspaces.map(({ name, members, description }, index) => (((index + 1) % 4 && index % 4)
@@ -57,7 +52,6 @@ return (
                         )}
                         
                     </span>
-                    <button onClick={addWorkspace}>Add</button>
                     
                 </span>
             </span>
