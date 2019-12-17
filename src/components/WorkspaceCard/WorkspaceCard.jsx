@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable max-lines-per-function */
+import React from 'react';
 import * as PropTypes from 'prop-types';
 import Group from '../../icons/group.png';
 import Thumbnail from '../../icons/graduation-hat.png';
@@ -9,44 +10,48 @@ import css from './WorkspaceCard.module.scss';
 
 const cln = classnames.bind(css);
 
-const WorkspaceCard = ({variant, name, className}) => {
+const WorkspaceCard = ({ variant, name, members, description, className }) => {
     const { pathname } = useLocation();
 
-    if(variant === 'extended'){
-        return(
-            <div className={cln('container', 'container--extended', className)}>
+    if (variant === 'extended'){
+        return (
+            <div className={cln('container', 'container--extended', className)} >
                 <span className={cln('info', 'info--extended')}>
-                    <img src={Thumbnail} className={css['thumbnail--extended']} alt='thumbnail' />
+                    <img src={Thumbnail} className={css['thumbnail--extended']} alt="thumbnail" />
                         <span className={css.name}>
                             {name}
                         </span>
                 </span>
                     <div className={css['description--extended']}>
-                        Don’t fall behind with our school books!
+                        {description}
                     </div>
                 <span className={cln('members', 'members--extended')}>
-                <img src={Group} className={css.group} alt='group' />
+                <img src={Group} className={css.group} alt="group" />
                     
                         <div className={css.text}>
-                            25 members
+                            {members} members
                         </div>
                 </span>
             </div>
-        )
+        );
     }
 
-    return(
-        <NavLink to={`${pathname}/${name}`} className={css.linkItem}>
+    const workspaceState = { description,
+                            members,
+                            name };
+
+    return (
+        <NavLink to={`${pathname}/${name}`} workspace={workspaceState} className={css.linkItem}>
             <div className={cln('container', className)}>
-                <img src={Thumbnail} className={css.thumbnail} alt='thumbnail' />
+                <img src={Thumbnail} className={css.thumbnail} alt="thumbnail" />
             <span className={css.info}>
                     {name}
                     <div className={css.description}>
-                        Don’t fall behind with our school books!
+                        {description}
                     </div>
             </span>
             <span className={css.members}>
-                <b>25</b>
+                    <b>{members}</b>
                     <div className={css.text}>
                         members
                     </div>
@@ -55,6 +60,6 @@ const WorkspaceCard = ({variant, name, className}) => {
         </div>
         </NavLink>
     );
-}
+};
 
 export default WorkspaceCard;

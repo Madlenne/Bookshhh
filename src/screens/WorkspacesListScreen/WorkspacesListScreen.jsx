@@ -5,6 +5,7 @@ import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 import WorkspaceCard from '../../components/WorkspaceCard/WorkspaceCard.jsx';
+import Loader from '../../components/ui/Loader/Loader.jsx';
 
 import css from './WorkspacesListScreen.module.scss';
 import * as firebase from 'firebase/app';
@@ -38,7 +39,6 @@ const WorkspacesListScreen = () => {
 
     };
 
-
 return (
         <div className={css.container}>
             <Header mode="dark"/>
@@ -49,9 +49,11 @@ return (
                         Workspaces
                     </span>
                     <span className={css.workspaceCards}>
-                        { workspaces && workspaces.map((workspace, index) => (((index + 1) % 4 && index % 4)
-                            ? <WorkspaceCard key={name} name={workspace.name} />
-                            : <WorkspaceCard key={name} name={workspace.name} className={css.workspaceCardClassName} />)
+                        { workspaces.length === 0
+                        ? <Loader/>
+                        : workspaces.map(({ name, members, description }, index) => (((index + 1) % 4 && index % 4)
+                            ? <WorkspaceCard key={name} name={name} members={members} description={description}/>
+                            : <WorkspaceCard key={name} name={name} members={members} description={description} className={css.workspaceCardClassName} />)
                         )}
                         
                     </span>

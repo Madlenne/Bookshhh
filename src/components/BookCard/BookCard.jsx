@@ -11,8 +11,8 @@ import { NavLink, useLocation, generatePath } from 'react-router-dom';
 import * as firebase from 'firebase/app';
 
 
-const BookCard = ({ hasStartedReading, itemFromAPI }) => {
-
+const BookCard = ({ itemFromAPI }) => {
+    
     const { pathname } = useLocation();
     const [item, setItem] = useState(itemFromAPI);
     const [description, setDescription] = useState();
@@ -53,7 +53,7 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
             const smallThumbnail = get(item, 'volumeInfo.imageLinks.smallThumbnail', DefaultThumbnail);
             setThumbnail(smallThumbnail);
 
-            const { title } = item.volumeInfo;
+            const title = get(item, 'volumeInfo.title', 'Unknown title');
             setTtile(title);
 
             const authors = get(item, 'volumeInfo.authors[0]', 'Unknown author');
@@ -64,18 +64,19 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
         }
     }, [item]);
 
-    const addToMyLibrary = event => {
-        event.stopPropagation();
-        console.log('aa');
-        // firebase.firestore().collection('myLibrary')
-        // .add({
-        //     'bookId': id,
-        //     'grade': 0,
-        //     'userId': displayName
-        //     })
-        // .then(ref => {
-        //         console.log('Added document with ID: ', ref.id);
-        //     });
+    const addToMyLibrary = () => {
+
+        firebase.firestore().collection('myLibrary')
+        .add({
+            'bookId': id,
+            'grade': 0,
+            'item': itemFromAPI,
+            'userId': displayName
+            })
+        .then(ref => {
+                // setMyLibraryId(ref.id);
+                console.log('Added document with ID: ', ref.id);
+            });
     };
 
     const path = generatePath('/book/:id', {
@@ -97,10 +98,14 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
                     </div>
 
                     <div className={css.rate}>
-                        Grade!
+                       {isAddedToMyLibrary
+                       ? <>
+                       Grade!
                         <NavLink to={pathname}>
-                            <Stars/>
+                            <Stars bookId={id} userId={displayName}/>
                         </NavLink>
+                        </>
+                        : <span className={css.cantGrade} > Add to your library to grade this book! </span>}
                     </div>
                     {/* {hasStartedReading
                     ? <div className={css.progress}>
@@ -131,8 +136,8 @@ const BookCard = ({ hasStartedReading, itemFromAPI }) => {
 };
 
 BookCard.propTypes = {
-    'hasStartedReading': PropTypes.string,
-    'itemFromAPI': PropTypes.object.isRequired
+    'hasStartedReading': PropTypes.string
+    // 'itemFromAPI': PropTypes.object.isRequired
 };
 
 BookCard.defaultProps = {

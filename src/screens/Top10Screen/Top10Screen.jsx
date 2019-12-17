@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable max-lines-per-function */
+import React, { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
@@ -10,26 +11,47 @@ import css from './Top10Screen.module.scss';
 
 const Top10Screen = () => {
 
-    const genres = [1,2,3,4,5,6,7,8,9,10];
 
     const [isFetching, setIsFetching] = useState(false);
 
-    return(
+    const [items, setItems] = useState([]);
+
+     const API = 'https://www.googleapis.com/books/v1/volumes?q=subject:';
+    const query = `${API}crime&maxResults=2&key=AIzaSyDc1R1jLJAKSJpU3jy30RrKPyrBg5i2yF0`;
+
+    useEffect(() => {
+
+       setIsFetching(true);
+
+       async function fetchData() {
+           await fetch(query)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('DATA ', data);
+                    setItems(data.items);
+                    setIsFetching(false);
+
+            })
+.catch(error => {
+                console.error(error);
+            });
+       }
+       fetchData();
+    }, []);
+
+    return (
         <div className={css.container}>
-        <Header mode='dark'/>
+        <Header mode="dark"/>
         <span className={css.content}>
             <Suggestions/>
             <span className={css.myLibrary}>
                 <span className={css.title2}>
                     Top 10
-                    {/* {isFetching 
-                    ? <Loader/> 
-                    : <>
-                        <BookCard title="The Big Four" author="Agatha Christie" hasStartedReading />
-                        <BookCard title="The Big Four" author="Agatha Christie" />
-                        <BookCard title="The Big Four" author="Agatha Christie" />
-                    </> */}
-                    }
+                    {isFetching
+                    ? <Loader/>
+                    : items.map(item => <BookCard itemFromAPI={item} />) }
+                   
+                    
                 </span>
 
             </span>
@@ -38,6 +60,6 @@ const Top10Screen = () => {
     </div>
 
     );
-}
+};
 
 export default Top10Screen;
