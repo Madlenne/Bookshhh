@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable no-ternary */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
@@ -16,12 +17,21 @@ import css from './WorkspaceScreen.module.scss';
 
 const WorkspaceScreen = () => {
 
-    const events = [1, 2];
 
     const { pathname } = useLocation();
     const lastSlash = pathname.lastIndexOf('/');
     const id = pathname.substring(lastSlash + 1);
     const [workspaces, setWorkspaces] = useState([]);
+
+    const [displayName, setDisplayName] = useState('testUser');
+    const [events, setEvents] = useState([]);
+
+    const currentDate = Math.round(new Date().getTime() / 1000);
+    
+    useEffect(() => {
+        if (firebase.auth().currentUser) setDisplayName(firebase.auth().currentUser.displayName);
+  
+    }, [firebase.auth().currentUser]);
 
 
     useEffect(() => {
@@ -33,6 +43,17 @@ const WorkspaceScreen = () => {
         });
        
 }, []);
+
+useEffect(() => {
+    firebase.firestore().collection('calendar')
+    .where('workspace', '==', id)
+    .where('userId', '==', displayName)
+    .onSnapshot(eventsAPI => {
+        const event = eventsAPI.docs.filter(doc => doc.data().date.seconds > currentDate).map(doc => doc.data());
+        setEvents(event);
+    });
+   
+}, [id, displayName]);
 
     const { name, members, description } = { ...workspaces };
 
@@ -60,8 +81,8 @@ return (
                             Upcoming events
                         </div>
                         {events.map((event, index) => (index % 2
-                        ? <EventCard title="The Doll test" className={css.grayBackground}/>
-                        : <EventCard title="Macbeth essay" />))}
+                        ? <EventCard date={event.date.seconds} title={event.title} className={css.grayBackground}/>
+                        : <EventCard date={event.date.seconds} title={event.title }/>))}
                             
                     </span>
 

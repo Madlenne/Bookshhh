@@ -58,14 +58,18 @@ export const Calendar = ({ className, workspace = '' }) => {
 
   }, [firebase.auth().currentUser]);
 
-  console.log(displayName, workspace);
 
     useEffect(() => {
       firebase.firestore().collection('calendar')
       .where('userId', '==', displayName)
-      .where('workspace', '==', workspace)
       .onSnapshot(calendar => {
-          const calendarEvents = calendar.docs.map(doc => doc.data());
+          const calendarEvents = calendar.docs.filter(doc => {
+            if (workspace){
+              return doc.data().workspace === workspace;
+            }
+            
+            return doc;
+          }).map(doc => doc.data());
           setCalendarEvents(calendarEvents);
       });
      
