@@ -74,10 +74,17 @@
   grid-template-columns: 0.3fr 1.5fr;
   grid-gap: 10px;
   justify-content: space-between;
+  font-size: 15px;
+  line-height: 23px;
+
+  &:hover {
+    color: black;
+    cursor: auto;
+  }
 }
 
 .testIcon {
-  width: 80%;
+  width: 100%;
   height: auto;
   align-self: center;
 }

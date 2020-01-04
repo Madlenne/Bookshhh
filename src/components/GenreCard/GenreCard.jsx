@@ -21,7 +21,7 @@ const GenreCard = ({ type, thumbnail, className }) => {
                 { type }
             </span>
             <span className={css.booksAmount}>
-                <b className={css.number}>255</b>
+                <b className={css.number}>40</b>
             </span>
 
             </div>

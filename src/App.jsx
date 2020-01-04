@@ -30,7 +30,7 @@ return (
         <Route path="/workspaces/:workspace" component={WorkspaceScreen} />
         <Route path="/book/:id" component={BookScreen} />
         <Route exact path="/news" component={NewsScreen} />
-        <Route path="/library" component={LibraryScreen} />
+        <Route path="/library/:filter?" component={LibraryScreen} />
         <Route path="/profile" component={ProfileScreen} />
       </Router>
     </div>

@@ -33,11 +33,7 @@ const genreTypes = { 'Biography': BiographyThumbnail,
                     'Travel': TravelThumbnail };
 
 
-const GenreScreen = () =>
-
-    // const genres = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-     (
+const GenreScreen = () => (
         <div className={css.container}>
             <Header mode="dark"/>
             <span className={css.content}>

@@ -41,6 +41,7 @@
 .newTitle,
 .newComment {
   border: 0;
+  min-width: 20vw;
   font-size: 18px;
   color: #ac5615;
   margin-bottom: 2%;
@@ -60,6 +61,12 @@
   height: 2vh;
   width: 50vw;
   padding-bottom: 1%;
+}
+
+.stars {
+  grid-area: review;
+  justify-self: end;
+  align-self: center;
 }
 
 .grade {
@@ -95,6 +102,19 @@
 
   &:hover {
     width: 25%;
+    cursor: pointer;
+  }
+}
+
+.delete {
+  grid-area: review;
+  justify-self: end;
+  align-self: center;
+  width: 5%;
+  transition: width 0.3s;
+
+  &:hover {
+    width: 5.5%;
     cursor: pointer;
   }
 }

@@ -6,6 +6,8 @@ import * as PropTypes from 'prop-types';
 import User from '../../icons/user.png';
 import Grade from '../../icons/triangle.png';
 import Add from '../../icons/add.png';
+import Delete from '../../icons/delete.png';
+import Stars from '../../components/ui/Stars/Stars.jsx';
 import classnames from 'classnames/bind';
 import * as firebase from 'firebase/app';
 
@@ -13,14 +15,13 @@ import css from './ReviewCard.module.scss';
 
 const cln = classnames.bind(css);
 
-const ReviewCard = ({ reviewId, userId, title, comment, grade, className, creatingMode }) => {
+const ReviewCard = ({ reviewId, userId, title, comment, grade, stars, className, creatingMode, setIsReviewCreating }) => {
     const { pathname } = useLocation();
     const lastSlash = pathname.lastIndexOf('/');
     const id = pathname.substring(lastSlash + 1);
 
     const [newTitle, setNewTitle] = useState('');
     const [newComment, setNewComment] = useState('');
-    // const currentDate = new Date().getTime();
 
     let displayName;
     if (firebase.auth().currentUser) ({ displayName } = firebase.auth().currentUser);
@@ -62,6 +63,15 @@ const addReview = () => {
     .then(ref => {
             console.log('Added document with ID: ', ref.id);
         });
+
+        setIsReviewCreating(false);
+};
+
+const deleteReview = () => {
+
+    firebase.firestore().collection('comments')
+            .doc(reviewId)
+            .delete();
 };
 
 
@@ -102,8 +112,15 @@ const addReview = () => {
                     { comment }
                 </div>
             </div>
-            
+
+            {/* <span className={css.stars}>
+                <Stars bookId={id} userId={userId} readOnlyStars={stars}/>
+            </span> */}
+                {
+                 userId === displayName && <img src={Delete} className={css.delete} onClick={deleteReview} alt="user" />
+                }
             <span className={css.grade}>
+
                 <img src={Grade} className={css.up} onClick={voteUp} alt="user" />
                 {grade}
                 <img src={Grade} className={css.down} onClick={voteDown} alt="user" />

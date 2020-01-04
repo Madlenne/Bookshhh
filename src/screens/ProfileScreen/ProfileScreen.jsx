@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import RateBox from '../../components/RateBox/RateBox.jsx';
@@ -10,6 +10,7 @@ import css from './ProfileScreen.module.scss';
 import StatisticsTable from '../../components/Tables/Statistics/StatisticsTable.jsx';
 import Threads from '../../components/Tables/Threads/Threads.jsx';
 import Tests from '../../components/Tables/Tests/Tests.jsx';
+import * as firebase from 'firebase/app';
 
 
 const ProfileScreen = () => {
@@ -17,11 +18,20 @@ const ProfileScreen = () => {
     const location = useLocation();
     const { pathname } = location;
 
-    console.log(pathname);
 
     const highlightCurrentTab = tabName => pathname === `/profile${tabName}`;
 
-    return (
+    const [displayName, setDisplayName] = useState('');
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            setDisplayName(firebase.auth().currentUser.displayName);
+        } else {
+            setDisplayName('');
+        }
+      });
+    
+return (
         <div className={css.container}>
             <Header/>
             <div className={css.content}>
@@ -29,10 +39,10 @@ const ProfileScreen = () => {
                     <span className={css.userInfo}>
                         <img src={Avatar} className={css.userAvatar} />
                         <span className={css.userName}>
-                            Madlenne
-                            <div className={css.userStatus}>Advanced bookworm</div>
+                            {displayName}
+                            {/* <div className={css.userStatus}>Advanced bookworm</div> */}
                         </span>
-                        <button className={css.button}>Become a writer</button>
+                        {/* <button className={css.button}>Become a writer</button> */}
                     </span>
                     <span className={css.userActivity}>
                         <span className={css.tabs}>
@@ -52,20 +62,20 @@ const ProfileScreen = () => {
                             >
                                 Latest threads
                             </NavLink>
-                            <NavLink
+                            {/* <NavLink
                             to="/profile/tests"
                             className={css.tab}
                             activeClassName={css.activeClassName}
                             isActive={() => highlightCurrentTab('/tests')}
                             >
                                 Test
-                            </NavLink>
+                            </NavLink> */}
                         </span>
                         {
-                            (highlightCurrentTab('/statistics') || highlightCurrentTab('')) && <StatisticsTable/>
+                            (highlightCurrentTab('/statistics') || highlightCurrentTab('')) && <StatisticsTable displayName={displayName}/>
                         }
                         {
-                            highlightCurrentTab('/threads') && <Threads/>
+                            highlightCurrentTab('/threads') && <Threads displayName={displayName}/>
                         }
                         {
                             highlightCurrentTab('/tests') && <Tests/>

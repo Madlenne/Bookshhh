@@ -25,7 +25,7 @@
   grid-template-rows: 0.6fr 0.4fr;
   grid-template-areas:
     "basicInfo rate"
-    "progress rate";
+    "progress rate2";
 
   grid-gap: 3%;
   color: black;
@@ -53,6 +53,25 @@
   font-size: 21px;
   text-align: center;
   color: #9f4600;
+}
+
+.removeNavLink {
+  justify-self: center;
+  align-self: center;
+}
+
+.remove {
+  grid-area: rate2;
+  width: 25px;
+  align-self: center;
+  font-family: "Open Sans";
+  font-size: 14px;
+  justify-self: center;
+  transition: width 0.3s;
+
+  &:hover {
+    width: 28px;
+  }
 }
 
 .cantGrade {

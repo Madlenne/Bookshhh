@@ -20,7 +20,7 @@ const GenreScreen = () => {
     const [isFetching, setIsFetching] = useState(false);
 
      const API = 'https://www.googleapis.com/books/v1/volumes?q=subject:';
-    const query = `${API}${genre}&maxResults=2&key=AIzaSyDc1R1jLJAKSJpU3jy30RrKPyrBg5i2yF0`;
+    const query = `${API}${genre}&maxResults=3&key=AIzaSyDc1R1jLJAKSJpU3jy30RrKPyrBg5i2yF0`;
 
     useEffect(() => {
 

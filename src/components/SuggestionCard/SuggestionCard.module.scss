@@ -30,6 +30,12 @@
   grid-area: title;
   padding-bottom: 8%;
   text-align: left;
+  text-decoration: none;
+  color: rgb(212, 212, 212);
+
+  &:hover {
+    color: white;
+  }
 }
 
 .bookDescription {

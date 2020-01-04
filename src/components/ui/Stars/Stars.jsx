@@ -1,3 +1,6 @@
+/* eslint-disable no-ternary */
+/* eslint-disable react/jsx-key */
+/* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
@@ -7,7 +10,7 @@ import Star from '../../../icons/star.png';
 import StarEmpty from '../../../icons/star_empty.png';
 import css from './Stars.module.scss';
 
-const Stars = ({ bookId, userId }) => {
+const Stars = ({ bookId, userId, readOnlyStars }) => {
 
     const [hoveredStarIndex, setHoveredStarsIndex] = useState();
     const [chosenStarIndex, setChosenStarsIndex] = useState();
@@ -21,17 +24,20 @@ const Stars = ({ bookId, userId }) => {
     useEffect(() => {
         firebase.firestore().collection('myLibrary')
         .where('bookId', '==', bookId)
+        .where('userId', '==', userId)
         .onSnapshot(book => {
+            console.log(userId);
             const bookInMyLibraryId = book.docs.map(doc => doc.id);
             const bookInMyLibraryData = book.docs.map(doc => doc.data());
             if (bookInMyLibraryData.length){
 
                 setHoveredStarsIndex(bookInMyLibraryData[0].grade);
+                setChosenStarsIndex(bookInMyLibraryData[0].grade);
             }
             setMyLibraryId(bookInMyLibraryId[0]);
         });
        
-    }, [chosenStarIndex, bookId]);
+    }, [chosenStarIndex, bookId, userId]);
 
     const rate = index => {
         setChosenStarsIndex(index);
@@ -40,13 +46,35 @@ const Stars = ({ bookId, userId }) => {
         .doc(myLibraryId)
         .update({
             bookId,
-            'grade': index + 1,
+            'grade': index,
             userId
             })
         .catch(error => {
                 console.error(error);
             });
     };
+
+
+    if (readOnlyStars !== undefined){
+
+    
+        const previouslyDefinedStars = [];
+
+        for (let i = 0; i < readOnlyStars + 1; ++i){
+            previouslyDefinedStars.push(i);
+        }
+
+        return (
+            <div className={css.container} >
+           {
+        //    for(let i=0; i<readOnlyStars; ++i){}
+           previouslyDefinedStars.map(el => <img src={Star} className={css.star} alt="star"/>
+              
+            )}
+
+        </div>
+        );
+    }
 
     return (
         <div className={css.container} onMouseLeave={() => highlightStar(chosenStarIndex)} >

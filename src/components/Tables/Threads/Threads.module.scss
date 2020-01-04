@@ -27,3 +27,12 @@
   color: #d3d3d3;
   font-size: 13px;
 }
+
+.link {
+  color: #d3d3d3;
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+}

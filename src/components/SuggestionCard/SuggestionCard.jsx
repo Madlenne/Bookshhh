@@ -1,18 +1,17 @@
-import React from 'react'
+import React from 'react';
 import * as PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import Cover from '../../icons/the_shining_cover.jpg';
 import css from './SuggestionCard.module.scss';
 
 
-const SuggestionCard = () => {
-    return(
+const SuggestionCard = ({ cover, id, title, description }) => (
         <div className={css.container}>
-            <img src={Cover} className={css.cover} alt='bookCover'/>
-            <span className={css.bookTitle}>The Shining </span>
-            <span className={css.bookDescription}>Lorem ipsum dolor sit amet lorem ipsum dolor sit amet </span>
+            <img src={cover} className={css.cover} alt="bookCover"/>
+            <NavLink to={`/book/${id}`} className={css.bookTitle}>{title} </NavLink>
+            <span className={css.bookDescription}>{description}</span>
         </div>
 
     );
-}
 
 export default SuggestionCard;

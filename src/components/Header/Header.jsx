@@ -3,7 +3,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-ternary */
 /* eslint-disable max-lines-per-function */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
@@ -28,20 +28,27 @@ const ringButtonRenderer = (onClick, ref) => <img src={Ring} className={css.ring
 const Header = ({ mode }) => {
 
     const location = useLocation();
+    const currentDate = new Date().getTime();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoginFailed, setIsLoginFailed] = useState(false);
+    const [isRegisterFailed, setIsRegisterFailed] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [shouldShowRegisterModal, setShouldShowRegisterModal] = useState(false);
+    const [shouldDisplayNotification, setShouldDisplayNotification] = useState(false);
     
     const highlightCurrentTab = tabName => {
         const { pathname } = location;
         
         return pathname.substring(1) === tabName;
     };
+
+    let displayName = 'testUser';
+    if (firebase.auth().currentUser) ({ displayName } = firebase.auth().currentUser);
 
     const showRegisterModal = () => {
         setShouldShowRegisterModal(true);
@@ -71,19 +78,41 @@ const Header = ({ mode }) => {
     };
 
     const signUp = () => {
+
+        if (username !== '' && email !== '' && password !== '') {
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(result => {
             setUsername('');
             setEmail('');
             setPassword('');
-           
-return result.user.updateProfile({ 'displayName': username });
+
+            firebase.firestore().collection('statistics')
+            .add({
+                'userName': username,
+                'favourites': 0,
+                'inProgress': 0,
+                'inProgressDates': [],
+                'finished': 0,
+                'wantToRead': 0,
+                'reviews': 0
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        
+        return result.user.updateProfile({ 'displayName': username });
         })
         .catch(error => {
-            
             console.error(error);
+            setIsRegisterFailed(true);
+            setErrorMessage(error.message);
           });
           
+        } else {
+            setErrorMessage('Any field cannot be empty');
+            setIsRegisterFailed(true);
+        }
     };
 
     const logOut = () => {
@@ -106,26 +135,92 @@ return result.user.updateProfile({ 'displayName': username });
             const sessionTimeout = setTimeout(() => firebase.auth().signOut(), millisecondsUntilExpiration);
           });
 
-
         } else {
             setIsLoggedIn(false);
 
         }
       });
+
+
+      useEffect(() => {
+
+        if (displayName){
+
+            firebase.firestore().collection('statistics')
+            .where('userName', '==', displayName)
+                .onSnapshot(statisticsAPI => {
+                    
+                    const statistics = statisticsAPI.docs.map(doc => doc.data());
+                    // setStatistics(statistics);
+                    if (statistics){
+
+                        const { inProgressDates } = statistics[0];
+                        const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+                        const tooLondReadingBooks = inProgressDates.find(date => currentDate - date >= THIRTY_DAYS);
+                        if (tooLondReadingBooks){
+                            setShouldDisplayNotification(true);
+                        }
+                    }
+
+                });
+        }
+        
+    }, [displayName]);
+
+    // const countReadingRate = () => {
+    //     const { favourites, wantToRead, finished, reviews, inProgress, inProgressDates } = statistics[0];
+    //     let value = favourites + wantToRead * 3 + finished * 8 + reviews * 2;
+    //     let readingFactor;
+
+    //         const currentDate = new Date().getTime();
+
+    //         const THREE_DAYS = 3 * 24 * 60 * 60 * 60 * 1000;
+    //         const FIVE_DAYS = 5 * 24 * 60 * 60 * 60 * 1000;
+    //         const WEEK = 7 * 24 * 60 * 60 * 60 * 1000;
+    //         const TWO_WEEKS = 14 * 24 * 60 * 60 * 60 * 1000;
+
+    //         const datesDifference = inProgressDates.map(inProgressDate => currentDate - inProgressDate);
+
+    //         if (max(datesDifference) < THREE_DAYS){
+    //             readingFactor = 10;
+    //         } else if (datesDifference > THREE_DAYS && datesDifference < FIVE_DAYS){
+    //             readingFactor = 7;
+
+    //         } else if (datesDifference > FIVE_DAYS && datesDifference < WEEK){
+    //             readingFactor = 4;
+
+    //         } else if (datesDifference > WEEK && datesDifference < TWO_WEEKS){
+    //             readingFactor = 1;
+
+    //         }
+
+    //         value += inProgress * readingFactor;
+    //         const threshold = 10 + 15 * 3 + 10 * 8 + 7 * 2 + 10 + 4 + 1;
+            
+    //         return Math.round(value / threshold * 100);
+    // };
+
+    // if (statistics) countReadingRate();
+
+
     const renderLoginModal = () => <Dropdown buttonRenderer={logInButtonRenderer} arrowPosition={72} className={css.loginDropdown}>
 
         <Dropdown.Item itemKey="Login" className={css.loginItem}>
-            <input type="text" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={email} onChange={event => setEmail(event.target.value)} placeholder="Email"/>
+            <input type="text" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={email} onChange={event => {
+                setEmail(event.target.value); setIsLoginFailed(false);
+                }} placeholder="Email"/>
         </Dropdown.Item>
 
         <Dropdown.Item itemKey="Password" className={css.loginItem}>
-            <input type="password" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={password} onChange={event => setPassword(event.target.value)} placeholder="Password"/>
+            <input type="password" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={password} onChange={event => {
+                setPassword(event.target.value); setIsLoginFailed(false);
+                }} placeholder="Password"/>
         </Dropdown.Item>
         { isLoginFailed && <Dropdown.Item>
           <span className={css.wrongCredentials}> Wrong credentials! </span>
          </Dropdown.Item>}
         <Dropdown.Item itemKey="Submit" className={css.loginItem}>
-        <button type="submit" className={cln('loginButton', { 'loginFailureButton': isLoginFailed })} onClick={logIn}> {isLoginFailed ? 'Try again' : 'Log in'} </button>
+            <button type="submit" className={cln('loginButton', { 'loginFailureButton': isLoginFailed })} onClick={logIn}> {isLoginFailed ? 'Try again' : 'Log in'} </button>
         </Dropdown.Item>
         <Dropdown.Item itemKey="Register" className={css.register}>
             <span onClick={showRegisterModal} > No account yet? Click here to sign up! </span>
@@ -137,17 +232,25 @@ return result.user.updateProfile({ 'displayName': username });
 
     const renderRegisterModal = () => <Dropdown buttonRenderer={logInButtonRenderer} arrowPosition={75}>
              <Dropdown.Item itemKey="Login" className={css.loginItem}>
-                 <input type="text" className={css.loginInput} onChange={event => setUsername(event.target.value)} placeholder="Login"/>
+                 <input type="text" className={cln('loginInput', { 'loginFailureInput': isRegisterFailed })} onChange={event => {
+                    setUsername(event.target.value); setIsRegisterFailed(false);
+                    }} placeholder="Login"/>
              </Dropdown.Item>
 
-             <Dropdown.Item itemKey="Login" className={css.loginItem}>
-                <input type="text" className={cln('loginInput', { 'loginFailureInput': isLoginFailed })} value={email} onChange={event => setEmail(event.target.value)} placeholder="Email"/>
+             <Dropdown.Item itemKey="Email" className={css.loginItem}>
+                <input type="text" className={cln('loginInput', { 'loginFailureInput': isRegisterFailed })} value={email} onChange={event => {
+                    setEmail(event.target.value); setIsRegisterFailed(false);
+                    }} placeholder="Email"/>
             </Dropdown.Item>
 
              <Dropdown.Item itemKey="Password" className={css.loginItem}>
-                 <input type="password" className={css.loginInput} onChange={event => setPassword(event.target.value)} placeholder="Password"/>
+                 <input type="password" className={cln('loginInput', { 'loginFailureInput': isRegisterFailed })} onChange={event => {
+                    setPassword(event.target.value); setIsRegisterFailed(false);
+                    }} placeholder="Password"/>
              </Dropdown.Item>
-
+            { isRegisterFailed && <Dropdown.Item>
+                <span className={css.wrongCredentials}> {errorMessage} </span>
+            </Dropdown.Item>}
              <Dropdown.Item itemKey="Submit" className={css.loginItem}>
                 <button type="submit" className={css.loginButton} onClick={signUp}> Sign up </button>
             </Dropdown.Item>
@@ -159,13 +262,29 @@ return result.user.updateProfile({ 'displayName': username });
                 Bookshhh
             </NavLink>
                 <span className={css.menu}>
-                    <NavLink to="/top"
+                    {firebase.auth().currentUser &&
+                     <NavLink to="/library"
+                        className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
+                        activeClassName={css.activeClassName}
+                        isActive={() => highlightCurrentTab('library')}
+                    >
+                        My library
+                    </NavLink>
+                    }
+                    {/* <NavLink to="/top"
                         className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
                         activeClassName={css.activeClassName}
                         isActive={() => highlightCurrentTab('top')}
                     >
                         Top 10
-                    </NavLink>
+                    </NavLink> */}
+                    {/* <NavLink to="/library"
+                        className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
+                        activeClassName={css.activeClassName}
+                        isActive={() => highlightCurrentTab('library')}
+                    >
+                        My library
+                    </NavLink> */}
                     <NavLink to="/genres"
                         className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
                         activeClassName={css.activeClassName}
@@ -173,20 +292,20 @@ return result.user.updateProfile({ 'displayName': username });
                     >
                         Genres
                     </NavLink>
-                    <NavLink to="/workspaces"
+                    {/* <NavLink to="/workspaces"
                         className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
                         activeClassName={css.activeClassName}
                         isActive={() => highlightCurrentTab('workspaces')}
                     >
                         Workspaces
-                    </NavLink>
-                    <NavLink to="/news"
+                    </NavLink> */}
+                    {/* <NavLink to="/news"
                         className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
                         activeClassName={css.activeClassName}
                         isActive={() => highlightCurrentTab('news')}
                         >
                         What<span className={css.special}>'s new?</span>
-                    </NavLink>
+                    </NavLink> */}
                 </span>
             <span className={css.search}>
                 <Search />
@@ -196,19 +315,20 @@ return result.user.updateProfile({ 'displayName': username });
              { isLoggedIn
                 ? <>
                 <Dropdown buttonRenderer={ringButtonRenderer} arrowPosition={27}>
-                        <Dropdown.Item itemKey="Test" className={css.info}>
+                        {/* <Dropdown.Item itemKey="Test" className={css.info}>
                             <img src={Exam} className={css.testIcon} alt="testIcon"/>
                             <span>
                                 You have one test to take until tomorrow
                             </span>
-                            </Dropdown.Item>
+                            </Dropdown.Item> */}
                         <Dropdown.Item itemKey="ContinueRead" className={css.info}>
                             <img src={BookStack} className={css.testIcon} alt="testIcon"/>
-                            <span>
-                                You haven't read
-                                <span className={css.bookTitle}> Misery </span>
-                                for 5 days. Maybe it's time to continue?
+                            {shouldDisplayNotification
+                            ? <span>
+                                You have some books marked as reading for more than 30 days.
+                                Maybe it's time to continue?
                             </span>
+                            : 'No notifications'}
                             </Dropdown.Item>
                     </Dropdown>
 
@@ -218,7 +338,7 @@ return result.user.updateProfile({ 'displayName': username });
                             My library
                         </NavLink>
                     </Dropdown.Item>
-                    <Dropdown.Item itemKey="Calendar">Calendar</Dropdown.Item>
+                    {/* <Dropdown.Item itemKey="Calendar">Calendar</Dropdown.Item> */}
                     <Dropdown.Item itemKey="Profile">
                         <NavLink to="/profile" className={css.library}>
                             Profile

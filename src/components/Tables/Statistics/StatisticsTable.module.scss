@@ -23,3 +23,12 @@
   bottom: 10px;
   text-align: center;
 }
+
+.link {
+  color: rgba(211, 211, 211, 0.9);
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+}

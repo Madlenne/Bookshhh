@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .search {
   border-bottom: 1px solid !important;
   display: flex;
@@ -22,5 +26,28 @@
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.menu {
+  position: absolute;
+  left: 0;
+  width: 20.5vw;
+  z-index: 100;
+  background-color: white;
+}
+
+.menuOption {
+  display: block;
+
+  padding: 15px 10px;
+  border-bottom: 1px solid rgb(116, 116, 116);
+  text-decoration: none;
+  color: rgb(49, 49, 49);
+  font-size: 15px;
+  text-align: left;
+
+  &:hover {
+    background-color: #fafafa;
   }
 }

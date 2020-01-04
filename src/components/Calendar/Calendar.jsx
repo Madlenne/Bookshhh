@@ -227,7 +227,7 @@ const CalendarEventCreator = ({ date, isEventExpanded, displayName, workspace })
   return <div className={cln('eventContainer', { 'eventContainer--expanded': isExpanded })} ref={containerRef}>
     <div className={css.titles}>
      <input type="text" value={newTitle} onChange={event => setNewTitle(event.target.value)} className={css.title2} placeholder="Type a title..." />
-       <input type="text" value={workspace} className={css.workspace2} placeholder="Any workspace?" />
+       <input type="text" value={workspace} className={css.workspace2} />
     </div>
     <span className={css.date}>
       {`${day}.${month}.${year}`}

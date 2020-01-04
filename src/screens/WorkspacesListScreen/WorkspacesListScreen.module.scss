@@ -22,6 +22,7 @@
   grid-area: workspaces;
   text-align: left;
   padding-left: 5%;
+  // padding-right: 5%;
 }
 
 .title {
@@ -54,15 +55,15 @@
 }
 
 .addButton {
-  width: 2%;
-  // grid-area: review;
+  width: 2.5%;
+  grid-area: review;
   align-self: start;
   justify-self: start;
   transition: width 0.3s;
   padding-left: 20px;
 
   &:hover {
-    width: 2.5%;
+    width: 3%;
     cursor: pointer;
   }
 }
