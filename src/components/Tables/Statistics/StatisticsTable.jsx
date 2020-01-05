@@ -133,7 +133,7 @@ return (
                 </span>
             </div>
             <div className={css.tableRow}>
-            <NavLink to={'/library/favourites'} className={css.link}> Favourites </NavLink>
+            <NavLink to={'/library/favourite'} className={css.link}> Favourites </NavLink>
                 <span className={css.number}>
                 {statistics.favourites}
                 </span>

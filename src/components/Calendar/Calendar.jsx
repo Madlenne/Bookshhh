@@ -66,9 +66,12 @@ export const Calendar = ({ className }) => {
       .where('userId', '==', displayName)
       .onSnapshot(calendar => {
           const calendarEvents = calendar.docs.map(doc => doc.data());
-          setCalendarEvents(calendarEvents);
-      });
-     
+          if (calendarEvents.length){
+
+            setCalendarEvents(calendarEvents);
+          }
+        });
+        
       }, [displayName]);
 
       useEffect(() => {
