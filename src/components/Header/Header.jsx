@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable multiline-ternary */
 /* eslint-disable prefer-destructuring */
