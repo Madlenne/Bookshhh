@@ -1,10 +1,13 @@
+/* eslint-disable no-shadow */
+/* eslint-disable id-length */
 /* eslint-disable multiline-ternary */
 /* eslint-disable no-ternary */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-lines-per-function */
 /* eslint-disable max-statements */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CalendarEvent } from '../../components/Calendar/Calendar.jsx';
+import * as firebase from 'firebase/app';
 
 import classnames from 'classnames/bind';
 import css from './VerticalCalendar.module.scss';
@@ -27,8 +30,45 @@ const VerticalCalendar = () => {
     const currentDay = currentDate.getDate();
     const days = [];
 
+    const [displayName, setDisplayName] = useState('');
+    const [calendarEvents, setCalendarEvents] = useState();
+    const [calendarEventsDates, setCalendarEventsDates] = useState([]);
     const exampleDates = [new Date('Nov 3, 2019'), new Date('Nov 15, 2019'), new Date('Dec 15, 2019')];
+  
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            setDisplayName(firebase.auth().currentUser.displayName);
+        } else {
+            setDisplayName('');
+        }
+      });
 
+      useEffect(() => {
+        firebase.firestore().collection('calendar')
+        .where('userId', '==', displayName)
+        .onSnapshot(calendar => {
+            const calendarEvents = calendar.docs.map(doc => doc.data());
+            if (calendarEvents.length){
+  
+              setCalendarEvents(calendarEvents);
+            }
+          });
+          
+        }, [displayName]);
+  
+        useEffect(() => {
+          const calendarEventsAccumulator = [];
+  
+          if (calendarEvents){
+            calendarEvents.forEach(calendarEvent => {
+              calendarEventsAccumulator.push(new Date(calendarEvent.date.seconds * 1000));
+            });
+            
+            if (calendarEventsAccumulator.length) {
+              setCalendarEventsDates(calendarEventsAccumulator);
+            }
+          }
+        }, [calendarEvents]);
 
     const [clickedDay, setClickedDay] = useState(currentDay);
     const [isEventExpanded, setIsEventExpanded] = useState(false);
@@ -48,11 +88,11 @@ const VerticalCalendar = () => {
     };
 
     const monthName = monthNames[currentDate.getMonth()];
-
-    const date = { 'day': 22,
-                'month': 12,
-                'year': 2019 };
     
+    const date = { 'day': clickedDay,
+                        'month': currentDate.getMonth(),
+                        'year': 2020 };
+
 return (
          <div className={css.container}>
              <CalendarEvent key={isEventExpanded} date={date} isEventExpanded={isEventExpanded} className={css.calendarEvent}/>
@@ -60,7 +100,7 @@ return (
                 {days.map(day => <div key={day} className={cln('day',
                     {
                         'currentDay': clickedDay === day,
-                        'eventDay': areDaysEqual(day, exampleDates, currentDate.getMonth())
+                        'eventDay': areDaysEqual(day, calendarEventsDates, currentDate.getMonth())
                     })}
                     onClick={() => onDayClick(day)}>
                         {clickedDay === day ? monthName : ''} {day}

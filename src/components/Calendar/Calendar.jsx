@@ -45,7 +45,7 @@ export const Calendar = ({ className }) => {
   
   const [pickedMonth, setPickedMonth] = useState(currentMonth);
   const [pickedDay, setPickedDay] = useState();
-  const [displayName, setDisplayName] = useState('testUser');
+  const [displayName, setDisplayName] = useState('');
   const [calendarEvents, setCalendarEvents] = useState();
   const [calendarEventsDates, setCalendarEventsDates] = useState([]);
   const monthName = monthNames[pickedMonth];
@@ -55,11 +55,14 @@ export const Calendar = ({ className }) => {
     const monthDate = moment().set('month', pickedMonth)
     .startOf('month');
 
-    useEffect(() => {
-      if (firebase.auth().currentUser) setDisplayName(firebase.auth().currentUser.displayName);
 
-  }, [firebase.auth().currentUser]);
-
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        setDisplayName(firebase.auth().currentUser.displayName);
+    } else {
+        setDisplayName('');
+    }
+  });
 
     useEffect(() => {
       firebase.firestore().collection('calendar')
@@ -177,7 +180,7 @@ export const CalendarEvent = ({ date, title, description, isEventExpanded, class
  
     </div>
     <span className={css.date}>
-      {`${day}.${month}.${year}`}
+      {`${day}.${month + 1}.${year}`}
     </span>
     <div className={css.description}>
       {description}
@@ -186,7 +189,7 @@ export const CalendarEvent = ({ date, title, description, isEventExpanded, class
 };
 
 const CalendarEventCreator = ({ date, isEventExpanded, displayName }) => {
-
+  console.log(date);
   const { day, month, year } = date;
   const timestamp = new Date(year, month, day);
 
@@ -217,7 +220,9 @@ const CalendarEventCreator = ({ date, isEventExpanded, displayName }) => {
         })
     .then(ref => {
             console.log('Added document with ID: ', ref.id);
+            setIsExpanded(false);
         });
+
   };
 
 
@@ -226,7 +231,7 @@ const CalendarEventCreator = ({ date, isEventExpanded, displayName }) => {
      <input type="text" value={newTitle} onChange={event => setNewTitle(event.target.value)} className={css.title2} placeholder="Type a title..." />
     </div>
     <span className={css.date}>
-      {`${day}.${month}.${year}`}
+      {`${day}.${month + 1}.${year}`}
     </span>
     <input type="text" value={newDescription} onChange={event => setNewDescription(event.target.value)} className={css.description2} placeholder="Type a description..." />
     <img onClick={addNewEvent} src={Add} className={css.addButton} alt="png"/>
