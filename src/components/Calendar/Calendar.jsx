@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
+/* eslint-disable multiline-ternary */
+/* eslint-disable no-ternary */
+/* eslint-disable no-shadow */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect, useRef } from 'react';
-import * as PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import Add from '../../icons/add.png';
 import moment from 'moment';
@@ -21,25 +25,23 @@ const monthNames = [
 const areDaysEqual = (dayInMs, daysInMs) => {
   const onlyDay = Math.floor(dayInMs / 100000000);
   const onlyDays = daysInMs.map(day => Math.floor(day / 100000));
-  
+
 return onlyDays.includes(onlyDay);
 };
 
 const returnEqualTimestamp = (dayInMs, daysInMs) => {
   const onlyDay = Math.floor(dayInMs / 100000000);
-  const onlyDays = daysInMs.map(day => Math.floor(day / 100000));
   
   return daysInMs.filter(day => Math.floor(day / 100000) === onlyDay);
 
 
 };
 
-export const Calendar = ({ className, workspace = '' }) => {
+export const Calendar = ({ className }) => {
   
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
-  const exampleDates = [new Date('Nov 3, 2019').getTime(), new Date('Nov 15, 2019').getTime(), new Date('Dec 10, 2019').getTime()];
   
   const [pickedMonth, setPickedMonth] = useState(currentMonth);
   const [pickedDay, setPickedDay] = useState();
@@ -63,27 +65,23 @@ export const Calendar = ({ className, workspace = '' }) => {
       firebase.firestore().collection('calendar')
       .where('userId', '==', displayName)
       .onSnapshot(calendar => {
-          const calendarEvents = calendar.docs.filter(doc => {
-            if (workspace){
-              return doc.data().workspace === workspace;
-            }
-            
-            return doc;
-          }).map(doc => doc.data());
+          const calendarEvents = calendar.docs.map(doc => doc.data());
           setCalendarEvents(calendarEvents);
       });
      
-      }, [displayName, workspace]);
+      }, [displayName]);
 
       useEffect(() => {
         const calendarEventsAccumulator = [];
-        if (calendarEvents){
 
+        if (calendarEvents){
           calendarEvents.forEach(calendarEvent => {
             calendarEventsAccumulator.push(calendarEvent.date.seconds);
           });
-
-          setCalendarEventsDates(calendarEventsAccumulator);
+          
+          if (calendarEventsAccumulator.length) {
+            setCalendarEventsDates(calendarEventsAccumulator);
+          }
         }
       }, [calendarEvents]);
 
@@ -123,7 +121,7 @@ export const Calendar = ({ className, workspace = '' }) => {
                   calendarEvents && days.map((day, index) => {
                   const date = { 'day': day.format('D'),
                                 'month': pickedMonth,
-                                'year': 2019 };
+                                'year': 2020 };
 
                     const equalTimestamp = returnEqualTimestamp(day.valueOf(), calendarEventsDates);
                   const calendarEventItem = calendarEvents.filter(calendarEvent => calendarEvent.date.seconds === equalTimestamp[0]);
@@ -138,9 +136,9 @@ return (
                               { day.format('D') }
 
                             { pickedDay === index && areDaysEqual(day.valueOf(), calendarEventsDates) &&
-                            <CalendarEvent key={calendarEvents} date={date} title={calendarEventItem[0].title} workspace={calendarEventItem[0].workspace} description={calendarEventItem[0].description} isEventExpanded={pickedDay === index}/>}
+                            <CalendarEvent key={calendarEvents} date={date} title={calendarEventItem[0].title} description={calendarEventItem[0].description} isEventExpanded={pickedDay === index}/>}
                             { pickedDay === index && !areDaysEqual(day.valueOf(), calendarEventsDates) &&
-                            <CalendarEventCreator date={date} displayName={displayName} workspace={workspace} isEventExpanded={pickedDay === index}/>}
+                            <CalendarEventCreator date={date} displayName={displayName} isEventExpanded={pickedDay === index}/>}
                           </div>
                         </>
                   );
@@ -153,7 +151,7 @@ return (
     );
 };
 
-export const CalendarEvent = ({ date, title, workspace, description, isEventExpanded, className }) => {
+export const CalendarEvent = ({ date, title, description, isEventExpanded, className }) => {
 
   const { day, month, year } = date;
 
@@ -173,9 +171,7 @@ export const CalendarEvent = ({ date, title, workspace, description, isEventExpa
   return <div className={cln('eventContainer', className, { 'eventContainer--expanded': isExpanded })} ref={containerRef}>
     <div className={css.title}>
       {title}
-      <div className={css.workspace}>
-       {workspace}
-      </div>
+ 
     </div>
     <span className={css.date}>
       {`${day}.${month}.${year}`}
@@ -186,7 +182,7 @@ export const CalendarEvent = ({ date, title, workspace, description, isEventExpa
   </div>;
 };
 
-const CalendarEventCreator = ({ date, isEventExpanded, displayName, workspace }) => {
+const CalendarEventCreator = ({ date, isEventExpanded, displayName }) => {
 
   const { day, month, year } = date;
   const timestamp = new Date(year, month, day);
@@ -195,7 +191,6 @@ const CalendarEventCreator = ({ date, isEventExpanded, displayName, workspace })
   const [isExpanded, setIsExpanded] = useState(isEventExpanded);
 
   const [newTitle, setNewTitle] = useState('');
-  const [newWorkspace, setNewWorkspace] = useState('');
   const [newDescription, setNewDescription] = useState('');
 
   const handleOutsideAndOptionClick = event => {
@@ -215,8 +210,7 @@ const CalendarEventCreator = ({ date, isEventExpanded, displayName, workspace })
         'date': timestamp,
         'description': newDescription,
         'title': newTitle,
-        'userId': displayName,
-        workspace
+        'userId': displayName
         })
     .then(ref => {
             console.log('Added document with ID: ', ref.id);
@@ -227,7 +221,6 @@ const CalendarEventCreator = ({ date, isEventExpanded, displayName, workspace })
   return <div className={cln('eventContainer', { 'eventContainer--expanded': isExpanded })} ref={containerRef}>
     <div className={css.titles}>
      <input type="text" value={newTitle} onChange={event => setNewTitle(event.target.value)} className={css.title2} placeholder="Type a title..." />
-       <input type="text" value={workspace} className={css.workspace2} />
     </div>
     <span className={css.date}>
       {`${day}.${month}.${year}`}

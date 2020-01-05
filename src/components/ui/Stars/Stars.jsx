@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undefined */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-ternary */
 /* eslint-disable react/jsx-key */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
-import * as PropTypes from 'prop-types';
 import * as firebase from 'firebase/app';
 
 import Star from '../../../icons/star.png';
@@ -67,7 +70,6 @@ const Stars = ({ bookId, userId, readOnlyStars }) => {
         return (
             <div className={css.container} >
            {
-        //    for(let i=0; i<readOnlyStars; ++i){}
            previouslyDefinedStars.map(el => <img src={Star} className={css.star} alt="star"/>
               
             )}

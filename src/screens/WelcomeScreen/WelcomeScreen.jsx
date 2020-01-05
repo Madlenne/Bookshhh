@@ -1,5 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import backgroundBook from './book_transparent.png';
 import RateBox from '../../components/RateBox/RateBox.jsx';

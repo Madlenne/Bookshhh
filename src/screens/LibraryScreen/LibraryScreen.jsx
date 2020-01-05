@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable init-declarations */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-negated-condition */
 /* eslint-disable newline-before-return */
@@ -6,7 +9,6 @@
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
-import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import css from './LibraryScreen.module.scss';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
@@ -59,7 +61,6 @@ const LibraryScreen = () => {
        
     }, [displayName]);
 
-    // console.log(myLibraryBooks);
 
      useEffect(() => {
          
@@ -107,15 +108,9 @@ const LibraryScreen = () => {
                  filteredBooks = myLibraryBooks.filter(book => Boolean(book[filterType]));
              }
 
-            // setIsFilterApplied(true);
-             console.log('a', filteredBooks, filterType);
             return filteredBooks;
          };
 
-         const setFilters = filter => {
-            setFilterType(filter);
-            setIsFilterApplied(true);
-         };
 
          const setFilterPath = filter => {
             history.push(`/library/${filter}`);
@@ -131,10 +126,6 @@ const LibraryScreen = () => {
                 setIsFilterApplied(true);
             }
          });
-
-        //  if(pathname === ){
-
-        //  }
 
 
             return (
@@ -163,7 +154,6 @@ const LibraryScreen = () => {
                                         : !isFetching
                                         ? myLibraryBooks.map(myLibraryBook => <BookCard key={myLibraryBook.item.id} itemFromAPI={myLibraryBook.item}/>)
                                         : <Loader/>
-                                    // <div className={css.noBooks}> You have not any books added to your library </div>
                                     }
                                 </span>
                             </span>

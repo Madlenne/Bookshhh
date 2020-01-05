@@ -1,7 +1,10 @@
+/* eslint-disable no-shadow */
+/* eslint-disable sort-keys */
+/* eslint-disable react/prop-types */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import css from './StatisticsTable.module.scss';
 import * as firebase from 'firebase/app';
 
@@ -9,10 +12,6 @@ import * as firebase from 'firebase/app';
 const StatisticsTable = ({ displayName }) => {
 
     const [items, setItems] = useState([]);
-    const [favouritesNumber, setFavouritesNumber] = useState(0);
-    const [inProgressNumber, setInProgressNumber] = useState(0);
-    const [finished, setFinishedNumber] = useState(0);
-    const [wantToRead, setWantToRead] = useState(0);
     const [reviewsNumber, setReviewsNumber] = useState(0);
     const [statisticsId, setStatisticsId] = useState();
 
@@ -43,7 +42,6 @@ const StatisticsTable = ({ displayName }) => {
     if (items.length){
         statistics = items.reduce((allBooks, currentBook) => {
             
-            console.log(currentBook);
             if (currentBook.favourite){
 
                 allBooks.favourites += 1;
@@ -82,7 +80,6 @@ const StatisticsTable = ({ displayName }) => {
             });
 
             if (statisticsId){
-                // console.log(statisticsId, statistics);
 
                 firebase.firestore().collection('statistics')
                 .doc(statisticsId)

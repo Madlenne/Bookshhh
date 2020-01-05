@@ -1,8 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import * as PropTypes from 'prop-types';
-import Header from '../Header/Header.jsx';
-import Suggestions from '../Suggestions/Suggestions.jsx';
-import Thumbnail from '../../icons/graduation-hat.png';
 import classnames from 'classnames/bind';
 import { NavLink, useLocation } from 'react-router-dom';
 

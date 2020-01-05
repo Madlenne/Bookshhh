@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable no-ternary */
 import React, { useState } from 'react';
-import * as PropTypes from 'prop-types';
 import css from './Search.module.scss';
 import MagnifyingGlass from '../../icons/magnifying-glass.png';
 import { NavLink } from 'react-router-dom';

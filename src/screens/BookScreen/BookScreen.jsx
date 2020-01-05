@@ -1,3 +1,8 @@
+/* eslint-disable max-lines */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable sort-keys */
+/* eslint-disable multiline-ternary */
 /* eslint-disable newline-before-return */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-ternary */
@@ -98,7 +103,6 @@ const BookScreen = () => {
             .where('bookId', '==', id)
             .onSnapshot(comment => {
                 const reviews = comment.docs.map(doc => [doc.id, doc.data()]);
-                console.log('reviews', reviews);
                 setReviews(reviews);
             });
            
@@ -164,7 +168,6 @@ const BookScreen = () => {
             'reviews': 0
             })
         .then(ref => {
-                // setMyLibraryId(ref.id);
                 console.log('Added document with ID: ', ref.id);
             });
     };
@@ -172,25 +175,9 @@ const BookScreen = () => {
     const createReview = () => {
         setIsReviewCreating(creating => !creating);
     };
-
-    // useEffect(() => {
-
- 
-    //     async function fetchData() {
-    //         await fetch('https://www.googleapis.com/books/v1/users/107730858058582200299/bookshelves/3?key=AIzaSyA3izPXs8UVa0mopS54Cyym0v21IOGIVjk')
-    //              .then(response => response.json())
-    //              .then(data => {
-    //                 console.log(data);
-    //          })
-    //  .catch(error => {
-    //                  console.error(error);
-    //              });
-    //      }
-    //      fetchData();
-    //      }, [firebase.auth().currentUser]);
+    
  
          const toggleFavourites = () => {
-            // console.log(statistics);
             let favouritesNumber = 0;
 
             if (isFavourite){
@@ -288,9 +275,6 @@ const BookScreen = () => {
                 });
          };
 
-    // 107730858058582200299
-    // https://www.googleapis.com/books/v1/mylibrary/bookshelves/shelf/addVolume
-// console.log(isAddedToMyLibrary, displayName);
 return (
         <div className={css.container} >
             <Header mode="dark"/>
