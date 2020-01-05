@@ -39,6 +39,7 @@ const BookScreen = () => {
     const [isFavourite, setIsFavourite] = useState();
     const [isInProgress, setIsInProgress] = useState();
     const [isWantToRead, setIsWantToRead] = useState();
+    const [isFinished, setIsFinished] = useState();
     const [starsNumber, setStarsNumber] = useState(0);
     const [statisticsId, setStatisticsId] = useState();
     const [statistics, setStatistics] = useState();
@@ -68,6 +69,7 @@ const BookScreen = () => {
                 .then(data => {
 
                     setItemFromAPI(data);
+
                     const { title } = data.volumeInfo;
                     setTtile(data.volumeInfo.title);
 
@@ -123,6 +125,7 @@ const BookScreen = () => {
                 setIsInProgress(myBook[0].inProgress.isInProgress);
                 setIsWantToRead(myBook[0].wantToRead);
                 setStarsNumber(myBook[0].grade);
+                setIsFinished(myBook[0].finished);
             }
         });
        
@@ -237,7 +240,8 @@ const BookScreen = () => {
                 'inProgress': {
                     'isInProgress': !isInProgress,
                     'date': inProgressDate
-                }
+                },
+                'finished': !isFinished
                 })
             .catch(error => {
                     console.error(error);
@@ -254,7 +258,7 @@ const BookScreen = () => {
                     console.error(error);
                 });
          };
-
+         
          const wantToRead = () => {
 
             let wantToReadNumber = 0;

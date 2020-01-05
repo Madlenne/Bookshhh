@@ -84,7 +84,7 @@ return (
                  </div>
              </span>
              <span className={css.rate}>
-                {statistics && `${countReadingRate()}%`}
+                {statistics && displayName && `${countReadingRate()}%`}
              </span>
          </div>
 
