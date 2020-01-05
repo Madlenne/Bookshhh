@@ -1,9 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable max-statements */
-import React, { useState, useEffect } from 'react';
-import * as PropTypes from 'prop-types';
-import Exam from '../../icons/exam.png';
+import React from 'react';
 import classnames from 'classnames/bind';
-import * as firebase from 'firebase/app';
 
 import css from './EventCard.module.scss';
 

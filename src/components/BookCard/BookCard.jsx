@@ -1,9 +1,11 @@
+/* eslint-disable no-shadow */
+/* eslint-disable sort-keys */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-ternary */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
-import * as PropTypes from 'prop-types';
 import Stars from '../ui/Stars/Stars.jsx';
 import { get } from 'lodash';
 import DefaultThumbnail from '../../icons/cover_placeholder.png';
@@ -14,7 +16,7 @@ import * as firebase from 'firebase/app';
 
 
 const BookCard = ({ itemFromAPI }) => {
-    
+
     const { pathname } = useLocation();
     const [item, setItem] = useState(itemFromAPI);
     const [description, setDescription] = useState();
@@ -26,8 +28,6 @@ const BookCard = ({ itemFromAPI }) => {
     const [isAddedToMyLibrary, setIsAddedToMyLibrary] = useState();
     const [myLibraryId, setMyLibraryId] = useState();
 
-    const currentDate = new Date().getTime();
-
     let displayName = '';
     if (firebase.auth().currentUser) ({ displayName } = firebase.auth().currentUser);
 
@@ -37,7 +37,6 @@ const BookCard = ({ itemFromAPI }) => {
         .where('bookId', '==', id)
         .onSnapshot(book => {
             
-            //  console.log(myLibraryId);
             const bookInMyLibraryId = book.docs.map(doc => doc.id);
             if (bookInMyLibraryId.length){
 
@@ -90,7 +89,6 @@ const BookCard = ({ itemFromAPI }) => {
             'reviews': 0
             })
         .then(ref => {
-                // setMyLibraryId(ref.id);
                 console.log('Added document with ID: ', ref.id);
             });
     };
@@ -136,18 +134,9 @@ const BookCard = ({ itemFromAPI }) => {
                     <NavLink to={pathname} className={css.remove} onClick={removeFromLibrary}>
                         <img src={Remove} className={css.remove} alt="remove"/>
                      </NavLink>
-                    // <div className={css.remove} >
-                    //         REMOVE FROM MY LIBRARY
-                    //     </div>
+                    
                     }
-                    {/* {hasStartedReading
-                    ? <div className={css.progress}>
-                            Read in: <b> 100% </b>
-                        </div>
-                    : <div className={css.bookGenre}>
-                        CRIME NOVEL
-                    </div>
-                } */}
+                   
                 { isAddedToMyLibrary
                 ? <div className={css.added} >
                     ADDED TO MY LIBRARY
@@ -172,13 +161,5 @@ const BookCard = ({ itemFromAPI }) => {
     );
 };
 
-BookCard.propTypes = {
-    'hasStartedReading': PropTypes.string
-    // 'itemFromAPI': PropTypes.object.isRequired
-};
-
-BookCard.defaultProps = {
-    'hasStartedReading': false
-};
 
 export default BookCard;

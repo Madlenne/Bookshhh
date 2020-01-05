@@ -1,7 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import * as PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import Cover from '../../icons/the_shining_cover.jpg';
 import css from './SuggestionCard.module.scss';
 
 

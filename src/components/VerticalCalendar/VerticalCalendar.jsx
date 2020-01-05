@@ -1,7 +1,9 @@
+/* eslint-disable multiline-ternary */
+/* eslint-disable no-ternary */
+/* eslint-disable no-plusplus */
 /* eslint-disable max-lines-per-function */
 /* eslint-disable max-statements */
 import React, { useState } from 'react';
-import * as PropTypes from 'prop-types';
 import { CalendarEvent } from '../../components/Calendar/Calendar.jsx';
 
 import classnames from 'classnames/bind';
@@ -20,7 +22,7 @@ const areDaysEqual = (day, eventDays, month) => {
     return onlyDays.includes(day);
   };
 
-const VerticalCalendar = ({ className }) => {
+const VerticalCalendar = () => {
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
     const days = [];

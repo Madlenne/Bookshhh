@@ -1,3 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable multiline-ternary */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-unused-vars */
+/* eslint-disable sort-keys */
 /* eslint-disable max-statements-per-line */
 /* eslint-disable max-statements */
 /* eslint-disable no-nested-ternary */
@@ -9,7 +14,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 import Search from '../Search/Search.jsx';
 import Ring from '../../icons/ring.png';
 import User from '../../icons/user.png';
-import Exam from '../../icons/exam.png';
 import LogIn from '../../icons/log-in.png';
 import BookStack from '../../icons/books-stack-of-three.png';
 import Dropdown from '../ui/Dropdown/Dropdown.jsx';
@@ -122,7 +126,6 @@ const Header = ({ mode }) => {
 
         });
     };
-    // console.log(username, email, password);
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
           setIsLoggedIn(true);
@@ -151,7 +154,6 @@ const Header = ({ mode }) => {
                 .onSnapshot(statisticsAPI => {
                     
                     const statistics = statisticsAPI.docs.map(doc => doc.data());
-                    // setStatistics(statistics);
                     if (statistics){
 
                         const { inProgressDates } = statistics[0];
@@ -166,41 +168,6 @@ const Header = ({ mode }) => {
         }
         
     }, [displayName]);
-
-    // const countReadingRate = () => {
-    //     const { favourites, wantToRead, finished, reviews, inProgress, inProgressDates } = statistics[0];
-    //     let value = favourites + wantToRead * 3 + finished * 8 + reviews * 2;
-    //     let readingFactor;
-
-    //         const currentDate = new Date().getTime();
-
-    //         const THREE_DAYS = 3 * 24 * 60 * 60 * 60 * 1000;
-    //         const FIVE_DAYS = 5 * 24 * 60 * 60 * 60 * 1000;
-    //         const WEEK = 7 * 24 * 60 * 60 * 60 * 1000;
-    //         const TWO_WEEKS = 14 * 24 * 60 * 60 * 60 * 1000;
-
-    //         const datesDifference = inProgressDates.map(inProgressDate => currentDate - inProgressDate);
-
-    //         if (max(datesDifference) < THREE_DAYS){
-    //             readingFactor = 10;
-    //         } else if (datesDifference > THREE_DAYS && datesDifference < FIVE_DAYS){
-    //             readingFactor = 7;
-
-    //         } else if (datesDifference > FIVE_DAYS && datesDifference < WEEK){
-    //             readingFactor = 4;
-
-    //         } else if (datesDifference > WEEK && datesDifference < TWO_WEEKS){
-    //             readingFactor = 1;
-
-    //         }
-
-    //         value += inProgress * readingFactor;
-    //         const threshold = 10 + 15 * 3 + 10 * 8 + 7 * 2 + 10 + 4 + 1;
-            
-    //         return Math.round(value / threshold * 100);
-    // };
-
-    // if (statistics) countReadingRate();
 
 
     const renderLoginModal = () => <Dropdown buttonRenderer={logInButtonRenderer} arrowPosition={72} className={css.loginDropdown}>
@@ -271,20 +238,7 @@ const Header = ({ mode }) => {
                         My library
                     </NavLink>
                     }
-                    {/* <NavLink to="/top"
-                        className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
-                        activeClassName={css.activeClassName}
-                        isActive={() => highlightCurrentTab('top')}
-                    >
-                        Top 10
-                    </NavLink> */}
-                    {/* <NavLink to="/library"
-                        className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
-                        activeClassName={css.activeClassName}
-                        isActive={() => highlightCurrentTab('library')}
-                    >
-                        My library
-                    </NavLink> */}
+                    
                     <NavLink to="/genres"
                         className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
                         activeClassName={css.activeClassName}
@@ -292,20 +246,8 @@ const Header = ({ mode }) => {
                     >
                         Genres
                     </NavLink>
-                    {/* <NavLink to="/workspaces"
-                        className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
-                        activeClassName={css.activeClassName}
-                        isActive={() => highlightCurrentTab('workspaces')}
-                    >
-                        Workspaces
-                    </NavLink> */}
-                    {/* <NavLink to="/news"
-                        className={cln('menuItem', { 'menuItem--dark': mode === 'dark' })}
-                        activeClassName={css.activeClassName}
-                        isActive={() => highlightCurrentTab('news')}
-                        >
-                        What<span className={css.special}>'s new?</span>
-                    </NavLink> */}
+                   
+                    
                 </span>
             <span className={css.search}>
                 <Search />
@@ -315,12 +257,6 @@ const Header = ({ mode }) => {
              { isLoggedIn
                 ? <>
                 <Dropdown buttonRenderer={ringButtonRenderer} arrowPosition={27}>
-                        {/* <Dropdown.Item itemKey="Test" className={css.info}>
-                            <img src={Exam} className={css.testIcon} alt="testIcon"/>
-                            <span>
-                                You have one test to take until tomorrow
-                            </span>
-                            </Dropdown.Item> */}
                         <Dropdown.Item itemKey="ContinueRead" className={css.info}>
                             <img src={BookStack} className={css.testIcon} alt="testIcon"/>
                             {shouldDisplayNotification
@@ -338,7 +274,7 @@ const Header = ({ mode }) => {
                             My library
                         </NavLink>
                     </Dropdown.Item>
-                    {/* <Dropdown.Item itemKey="Calendar">Calendar</Dropdown.Item> */}
+                   
                     <Dropdown.Item itemKey="Profile">
                         <NavLink to="/profile" className={css.library}>
                             Profile

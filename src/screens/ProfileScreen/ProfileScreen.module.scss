@@ -103,7 +103,6 @@
 .rightPart {
   display: grid;
   grid-area: calendarAndRate;
-  // place-self: start;
   grid-template-rows: 0.8fr 0.4fr;
   grid-gap: 5%;
   grid-template-areas: "calendar" "rate";

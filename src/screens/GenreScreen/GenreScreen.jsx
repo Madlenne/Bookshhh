@@ -1,7 +1,8 @@
+/* eslint-disable no-ternary */
+/* eslint-disable react/jsx-key */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
-import * as PropTypes from 'prop-types';
 import Header from '../../components/Header/Header.jsx';
 import Suggestions from '../../components/Suggestions/Suggestions.jsx';
 import BookCard from '../../components/BookCard/BookCard.jsx';
@@ -30,7 +31,6 @@ const GenreScreen = () => {
            await fetch(query)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('DATA ', data);
                     setItems(data.items);
                     setIsFetching(false);
 

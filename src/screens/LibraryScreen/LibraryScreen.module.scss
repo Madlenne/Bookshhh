@@ -3,10 +3,7 @@
   grid-template-rows: 100px 2fr;
   grid-template-columns: auto;
   grid-template-areas: "header" "rest";
-  // grid-gap: 5%;
-  // min-height: 100%;
   background: linear-gradient(90deg, #242424 18%, #ffffff 18%);
-  // position: fixed;
   top: 0;
   left: 0;
 }
@@ -48,7 +45,6 @@
   font-family: "Open Sans";
   font-size: 16px;
   padding: 10px;
-  // height: 20px;
 
   &:hover {
     background-color: #fafafa;

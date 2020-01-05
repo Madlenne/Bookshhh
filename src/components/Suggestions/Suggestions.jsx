@@ -1,15 +1,18 @@
+/* eslint-disable no-shadow */
+/* eslint-disable sort-keys */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-unused-vars */
+/* eslint-disable multiline-ternary */
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-statements */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable max-lines-per-function */
 /* eslint-disable no-ternary */
 import React, { useState, useEffect } from 'react';
-import * as PropTypes from 'prop-types';
 
 import SuggestionCard from '../SuggestionCard/SuggestionCard.jsx';
-import Cover from '../../icons/the_shining_cover.jpg';
-import Watcher from '../../icons/the_watcher.jpg';
-import MemoryMan from '../../icons/memory_man.jpg';
 import css from './Suggestions.module.scss';
 import * as firebase from 'firebase/app';
 
@@ -33,15 +36,8 @@ const Suggestions = () => {
         .where('userId', '==', displayName)
         .onSnapshot(books => {
 
-            // const bookInMyLibraryId = book.docs.map(doc => doc.id);
-
-            // if (bookInMyLibraryId.length){
-
-            //     setMyLibraryId(bookInMyLibraryId[0]);
-            // }
             const myBooks = books.docs.map(doc => doc.data());
 
-             console.log(myBooks);
              const favouriteBooks = myBooks.filter(book => Boolean(book.favourite));
              if (displayName){
                 const categoriesAndAuthors = favouriteBooks.map(book => {
@@ -54,8 +50,6 @@ const Suggestions = () => {
                             'id': idItem };
                 });
 
-                // const authors = favouriteBooks.map(book => book.item.volumeInfo.authors[0]);
-                //  console.log(favouriteBooks, categoriesAndAuthors);
                  setCategoriesAndAuthors(categoriesAndAuthors);
              }
             
@@ -71,8 +65,7 @@ const Suggestions = () => {
             const API = 'https://www.googleapis.com/books/v1/volumes?q=subject:';
             
             categoriesAndAuthors.forEach(element => {
-                // setIsFetching(true);
-                // console.log(element.category, element.author);
+                
                 const query = `${API}${element.category}+inauthor:${encodeURI(element.author)}&maxResults=2`;
                  fetchData(query);
               
@@ -119,7 +112,6 @@ return data;
                      console.error(error);
                  });
 
-            //  setIsFetching(false);
             
     return myLibraryItem;
          }
@@ -139,7 +131,7 @@ return (
                     
                     ? suggestions.length ? suggestions.map(suggestion => <SuggestionCard cover={suggestion.cover} id={suggestion.id} title={suggestion.title} description={suggestion.description}/>
                         )
-                        : 'Mark some books as favourite to have suggestions.'
+                        : <span className={css.noSuggest}> Mark some books as favourite to have suggestions. </span>
                     
                     : <span className={css.notLoggedIn}>
                         You have to be logged in to see recommendations

@@ -1,7 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-shadow */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from 'react';
-import * as PropTypes from 'prop-types';
 
 import { max } from 'lodash';
 import classnames from 'classnames/bind';
@@ -41,8 +45,9 @@ const RateBox = ({ className }) => {
 
     const countReadingRate = () => {
         const { favourites, wantToRead, finished, reviews, inProgress, inProgressDates } = statistics[0];
+
         let value = favourites + wantToRead * 3 + finished * 8 + reviews * 2;
-        let readingFactor;
+        let readingFactor = 1;
 
             const currentDate = new Date().getTime();
 
@@ -69,7 +74,7 @@ const RateBox = ({ className }) => {
             value += inProgress * readingFactor;
             const threshold = 10 + 15 * 3 + 10 * 8 + 7 * 2 + 10 + 4 + 1;
             
-            return Math.round(value / threshold * 100);
+return Math.round(value / threshold * 100);
     };
 
     if (statistics) countReadingRate();

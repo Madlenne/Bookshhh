@@ -1,3 +1,8 @@
+/* eslint-disable sort-keys */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable max-statements */
 /* eslint-disable newline-before-return */
 /* eslint-disable react/jsx-key */
@@ -11,8 +16,6 @@ import * as firebase from 'firebase/app';
 const Threads = ({ displayName }) => {
 
     const [comments, setComments] = useState([]);
-    const [titles, setTitles] = useState([]);
-    const [authors, setAuthors] = useState([]);
     const [threads, setThreads] = useState([]);
 
     const threadsTemp = [];
@@ -47,7 +50,6 @@ const Threads = ({ displayName }) => {
            const books = await fetch(query)
                  .then(response => response.json())
                  .then(data => {
-                    //  console.log(data);
                      const threadTemp = {
                          comment,
                          'title': data.volumeInfo.title,
@@ -57,13 +59,7 @@ const Threads = ({ displayName }) => {
                         threadsTemp.push(threadTemp);
 
                          setThreads(previousThreads => previousThreads = threadsTemp.map(newThread => newThread));
-                        //  setThreads(a => a.push(threadTemp));
-
-
-                    //  titlesTemp.push(data.volumeInfo.title);
-                    //  authorsTemp.push(data.volumeInfo.authors[0]);
-                    //  setTitles(titlesTemp);
-                    //  setAuthors(authorsTemp);
+                        
                      
                     return data;
                      
@@ -72,7 +68,6 @@ const Threads = ({ displayName }) => {
                      console.error(error);
                  });
 
-            //  setIsFetching(false);
             
             return books;
          }
@@ -84,7 +79,7 @@ const Threads = ({ displayName }) => {
         <div className={css.table} key={threads.length}>
 
             {
-                threads.map((thread, index) => <div className={css.tableRow}>
+                threads.map(thread => <div className={css.tableRow}>
                     <span className={css.opinion}>
                        {`${thread.comment.content.substr(0, 40)}...`}
                     </span>

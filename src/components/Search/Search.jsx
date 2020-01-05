@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable no-ternary */
 import React, { useState } from 'react';
-import * as PropTypes from 'prop-types';
 import css from './Search.module.scss';
 import MagnifyingGlass from '../../icons/magnifying-glass.png';
 import { NavLink } from 'react-router-dom';
@@ -13,7 +14,6 @@ const Search = () => {
         await fetch(query)
              .then(response => response.json())
              .then(data => {
-                 console.log('DATA ', data);
                  setItems(data.items);
 
          })
